@@ -25,8 +25,7 @@
         <div class="ob-bg__grid"></div>
     </div>
 
-    <!-- Confetti Canvas (Step 5) -->
-    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
 
     <!-- Main Onboarding Shell -->
     <main class="ob-shell" id="onboarding-main" role="main" aria-label="Onboarding wizard">
@@ -189,6 +188,18 @@
                     </div>
 
                     <form class="s2-form" id="s2-form" novalidate>
+                        <div class="ob-field">
+                            <input type="text" id="full-name" name="full-name" class="ob-input" placeholder=" " autocomplete="name" required>
+                            <label for="full-name" class="ob-label">Full Name <span class="ob-required" aria-hidden="true">*</span></label>
+                            <span class="ob-error" id="err-full-name" role="alert"></span>
+                        </div>
+
+                        <div class="ob-field">
+                            <input type="email" id="work-email" name="work-email" class="ob-input" placeholder=" " autocomplete="email" required>
+                            <label for="work-email" class="ob-label">Work Email <span class="ob-required" aria-hidden="true">*</span></label>
+                            <span class="ob-error" id="err-work-email" role="alert"></span>
+                        </div>
+
                         <div class="ob-field">
                             <input type="text" id="company-name" name="company-name" class="ob-input" placeholder=" " autocomplete="organization" required>
                             <label for="company-name" class="ob-label">Company Name <span class="ob-required" aria-hidden="true">*</span></label>
@@ -558,40 +569,7 @@
                         </div>
                     </div>
 
-                    <!-- Success State -->
-                    <div class="s5-success" id="s5-success" aria-live="polite" hidden>
-                        <div class="s5-success__icon-wrap">
-                            <div class="s5-success__ring"></div>
-                            <div class="s5-success__icon">
-                                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                            </div>
-                        </div>
-                        <h1 class="s5-success__title" id="s5-title">Welcome to FlowSync! <span class="s5-success__emoji" aria-hidden="true">🎉</span></h1>
-                        <p class="s5-success__sub">Your workspace has been successfully created. Everything is ready — let's build something great.</p>
-                        <div class="s5-success__stats">
-                            <div class="s5-stat">
-                                <span class="s5-stat__val" id="stat-members">0</span>
-                                <span class="s5-stat__label">Members</span>
-                            </div>
-                            <div class="s5-stat">
-                                <span class="s5-stat__val">1</span>
-                                <span class="s5-stat__label">Workspace</span>
-                            </div>
-                            <div class="s5-stat">
-                                <span class="s5-stat__val">∞</span>
-                                <span class="s5-stat__label">Possibilities</span>
-                            </div>
-                        </div>
-                        <div class="s5-success__actions">
-                            <a href="dashboard.html" class="ob-btn ob-btn--primary ob-btn--lg ripple" id="open-dashboard">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                                Open Dashboard
-                            </a>
-                            <a href="index.html" class="ob-btn ob-btn--ghost ripple" id="back-to-landing">
-                                Back to Landing Page
-                            </a>
-                        </div>
-                    </div>
+
 
                 </div>
             </section>

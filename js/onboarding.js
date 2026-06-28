@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Selections state
     const onboardingState = {
         role: '',
+        fullName: '',
+        workEmail: '',
         companyName: '',
         industry: '',
         teamSize: '',
@@ -45,6 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Step 2 Elements
     const s2Form = document.getElementById('s2-form');
+    const fullNameInput = document.getElementById('full-name');
+    const workEmailInput = document.getElementById('work-email');
     const companyNameInput = document.getElementById('company-name');
     const industrySelect = document.getElementById('industry');
     const teamSizeSelect = document.getElementById('team-size');
@@ -81,13 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Step 5 Elements
     const loadingView = document.getElementById('s5-loading');
-    const successView = document.getElementById('s5-success');
     const s5ProgressFill = document.getElementById('s5-progress-fill');
     const task1 = document.getElementById('task-1');
     const task2 = document.getElementById('task-2');
     const task3 = document.getElementById('task-3');
-    const statMembers = document.getElementById('stat-members');
-    const confettiCanvas = document.getElementById('confetti-canvas');
 
     // Initialize Ripple Hover Effect for buttons
     initializeRipples();
@@ -194,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // STEP 2: Company Info / Floating labels & validation
     // ────────────────────────────────────────────────────────────
 
-    const textInputs = [companyNameInput];
+    const textInputs = [fullNameInput, workEmailInput, companyNameInput];
     const selectInputs = [industrySelect, teamSizeSelect, countrySelect];
 
     // Helper to clear error display
@@ -231,9 +232,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Inline validation for fullName
+    fullNameInput.addEventListener('input', () => {
+        const errEl = document.getElementById('err-full-name');
+        if (fullNameInput.value.trim().length > 0) {
+            clearError(fullNameInput, errEl);
+            fullNameInput.classList.add('has-value');
+        } else {
+            fullNameInput.classList.remove('has-value');
+            setError(fullNameInput, errEl, 'Full name is required');
+        }
+    });
+
+    // Inline validation for workEmail
+    workEmailInput.addEventListener('input', () => {
+        const errEl = document.getElementById('err-work-email');
+        if (workEmailInput.value.trim().length > 0) {
+            clearError(workEmailInput, errEl);
+            workEmailInput.classList.add('has-value');
+        } else {
+            workEmailInput.classList.remove('has-value');
+            setError(workEmailInput, errEl, 'Work email is required');
+        }
+    });
+
     s2NextBtn.addEventListener('click', (e) => {
         e.preventDefault();
         let isValid = true;
+
+        // Full Name Validate
+        const nameErr = document.getElementById('err-full-name');
+        if (!fullNameInput.value.trim()) {
+            setError(fullNameInput, nameErr, 'Full name is required');
+            isValid = false;
+        } else {
+            clearError(fullNameInput, nameErr);
+        }
+
+        // Work Email Validate
+        const emailErr = document.getElementById('err-work-email');
+        if (!workEmailInput.value.trim()) {
+            setError(workEmailInput, emailErr, 'Work email is required');
+            isValid = false;
+        } else {
+            clearError(workEmailInput, emailErr);
+        }
 
         // Company Name Validate
         const compErr = document.getElementById('err-company-name');
@@ -256,6 +299,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (isValid) {
+            onboardingState.fullName = fullNameInput.value.trim();
+            onboardingState.workEmail = workEmailInput.value.trim();
             onboardingState.companyName = companyNameInput.value.trim();
             onboardingState.industry = industrySelect.value;
             onboardingState.teamSize = teamSizeSelect.value;
@@ -436,8 +481,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function startStep5Simulation() {
         // Reset view states
         loadingView.style.display = 'flex';
-        successView.style.display = 'none';
-        successView.setAttribute('hidden', 'true');
         s5ProgressFill.style.width = '0%';
         
         // Reset tasks
@@ -473,22 +516,18 @@ document.addEventListener('DOMContentLoaded', () => {
             completeTask(task3);
         }, 3600);
 
-        // 4. Reveal success view (4.0s)
+        // 4. Redirect to success.html (4.0s)
         setTimeout(() => {
             // Animate transition fade
             loadingView.style.opacity = '0';
             loadingView.style.transition = 'opacity .4s ease';
             
             setTimeout(() => {
-                loadingView.style.display = 'none';
-                successView.style.display = 'flex';
-                successView.removeAttribute('hidden');
+                // Save team member count (including the user) to localStorage
+                localStorage.setItem('flowsync-team-members', onboardingState.teamMembers.length + 1);
                 
-                // Set stats values
-                statMembers.textContent = onboardingState.teamMembers.length + 1; // plus the user
-                
-                // Start confetti!
-                initConfetti();
+                // Redirect to success.html
+                window.location.href = 'success.html';
             }, 400);
         }, 4100);
     }
@@ -583,87 +622,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Confetti Engine
-    function initConfetti() {
-        const ctx = confettiCanvas.getContext('2d');
-        let animationFrameId;
-
-        // Resize canvas to window size
-        confettiCanvas.width = window.innerWidth;
-        confettiCanvas.height = window.innerHeight;
-
-        const colors = ['#2563EB', '#7C3AED', '#38BDF8', '#10B981', '#F59E0B', '#EF4444'];
-        const confettiCount = 180;
-        const confettiList = [];
-
-        class ConfettiParticle {
-            constructor() {
-                this.x = Math.random() * confettiCanvas.width;
-                this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
-                this.size = Math.random() * 8 + 6;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.speed = Math.random() * 4 + 3;
-                this.rotation = Math.random() * 360;
-                this.rotationSpeed = Math.random() * 4 - 2;
-                this.wobble = Math.random() * 10;
-                this.wobbleSpeed = Math.random() * 0.05 + 0.02;
-            }
-
-            update() {
-                this.y += this.speed;
-                this.x += Math.sin(this.wobble) * 1.5;
-                this.wobble += this.wobbleSpeed;
-                this.rotation += this.rotationSpeed;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.translate(this.x, this.y);
-                ctx.rotate((this.rotation * Math.PI) / 180);
-                ctx.fillStyle = this.color;
-                ctx.fillRect(-this.size / 2, -this.size / 2, this.size, this.size);
-                ctx.restore();
-            }
-        }
-
-        // Initialize particles
-        for (let i = 0; i < confettiCount; i++) {
-            confettiList.push(new ConfettiParticle());
-        }
-
-        let animationTime = 0;
-        const maxAnimationTime = 300; // frames (~5 seconds)
-
-        function animateConfetti() {
-            ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-            
-            let elementsActive = false;
-            confettiList.forEach(particle => {
-                particle.update();
-                particle.draw();
-                if (particle.y < confettiCanvas.height) {
-                    elementsActive = true;
-                }
-            });
-
-            animationTime++;
-
-            if (elementsActive && animationTime < maxAnimationTime) {
-                animationFrameId = requestAnimationFrame(animateConfetti);
-            } else {
-                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-                cancelAnimationFrame(animationFrameId);
-            }
-        }
-
-        animateConfetti();
-
-        // Responsive handling
-        window.addEventListener('resize', () => {
-            if (confettiCanvas) {
-                confettiCanvas.width = window.innerWidth;
-                confettiCanvas.height = window.innerHeight;
-            }
-        });
-    }
 });

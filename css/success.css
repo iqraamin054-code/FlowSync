@@ -1,5 +1,9 @@
-﻿:root {
-    --success-card-bg: rgba(15, 23, 42, 0.72);
+/* ============================================================
+   FLOWSYNC — Success  |  success.css
+   Standalone premium success page styling matching onboarding
+   ============================================================ */
+
+:root {
     --success-card-border: rgba(255, 255, 255, 0.12);
     --success-glow: rgba(37, 99, 235, 0.22);
     --success-ring: linear-gradient(135deg, rgba(37, 99, 235, .2), rgba(124, 58, 237, .2));
@@ -14,6 +18,91 @@ body {
     color: var(--text-primary);
 }
 
+/* ────────────────────────────────────────────────────────────
+   1. ANIMATED BACKGROUND (Matched with onboarding.css)
+   ──────────────────────────────────────────────────────────── */
+
+.ob-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.ob-bg__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+    background-size: 48px 48px;
+}
+
+[data-theme="light"] .ob-bg__grid {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, .04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, .04) 1px, transparent 1px);
+}
+
+.ob-bg__orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    animation: orbFloat 12s ease-in-out infinite;
+}
+
+.ob-bg__orb--1 {
+    width: 600px;
+    height: 600px;
+    top: -200px;
+    left: -150px;
+    background: radial-gradient(circle, rgba(37, 99, 235, .25), transparent 70%);
+    animation-delay: 0s;
+}
+
+.ob-bg__orb--2 {
+    width: 500px;
+    height: 500px;
+    bottom: -150px;
+    right: -100px;
+    background: radial-gradient(circle, rgba(124, 58, 237, .22), transparent 70%);
+    animation-delay: -4s;
+}
+
+.ob-bg__orb--3 {
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(56, 189, 248, .1), transparent 70%);
+    animation-delay: -8s;
+}
+
+@keyframes orbFloat {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+    33% {
+        transform: translateY(-30px) scale(1.03);
+    }
+    66% {
+        transform: translateY(20px) scale(0.97);
+    }
+}
+
+#confetti-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+/* ────────────────────────────────────────────────────────────
+   2. SHELL LAYOUT
+   ──────────────────────────────────────────────────────────── */
+
 .success-shell {
     min-height: 100vh;
     display: flex;
@@ -21,8 +110,8 @@ body {
     justify-content: center;
     padding: 2rem;
     position: relative;
-    background: radial-gradient(circle at top left, rgba(37,99,235,0.12), transparent 24%),
-                radial-gradient(circle at bottom right, rgba(124,58,237,0.14), transparent 18%);
+    z-index: 1;
+    background: transparent;
 }
 
 .success-panel {
@@ -30,22 +119,41 @@ body {
     max-width: 720px;
 }
 
+/* ────────────────────────────────────────────────────────────
+   3. GLASS CARD (Matched with onboarding.css .ob-card)
+   ──────────────────────────────────────────────────────────── */
+
 .success-card {
-    background: rgba(15, 23, 42, 0.78);
-    border: 1px solid var(--success-card-border);
-    border-radius: 2rem;
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(22px);
-    -webkit-backdrop-filter: blur(22px);
+    background: var(--bg-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-xl), inset 0 1px 0 rgba(255, 255, 255, .06);
     overflow: hidden;
+    animation: cardIn .5s cubic-bezier(.16, 1, .3, 1) forwards;
 }
 
-#confetti-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
+[data-theme="light"] .success-card {
+    background: rgba(255, 255, 255, .85);
+    border-color: rgba(124, 58, 237, .1);
+    box-shadow: 0 8px 40px rgba(124, 58, 237, .08), inset 0 1px 0 rgba(255, 255, 255, .9);
 }
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(.99);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ────────────────────────────────────────────────────────────
+   4. SUCCESS STEP CONTENT (Matched with onboarding.css)
+   ──────────────────────────────────────────────────────────── */
 
 .s5-success {
     padding: 3.5rem 2.5rem;
@@ -65,6 +173,16 @@ body {
     align-items: center;
     justify-content: center;
     margin-bottom: 0.5rem;
+    animation: gentleFloat 4s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
 }
 
 .s5-success__ring {
@@ -76,12 +194,10 @@ body {
 }
 
 @keyframes pulseRing {
-    0%,
-    100% {
+    0%, 100% {
         transform: scale(1);
         opacity: 0.8;
     }
-
     50% {
         transform: scale(1.1);
         opacity: 0.4;
@@ -202,53 +318,82 @@ body {
     justify-content: center;
 }
 
+/* ────────────────────────────────────────────────────────────
+   5. BUTTONS (Matched with onboarding.css)
+   ──────────────────────────────────────────────────────────── */
+
 .ob-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: .5rem;
     font-family: var(--font-body);
+    font-size: var(--text-sm);
     font-weight: var(--weight-semibold);
-    font-size: 0.95rem;
-    padding: 0.95rem 1.4rem;
-    border-radius: 9999px;
-    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
-    text-decoration: none;
     line-height: 1;
+    white-space: nowrap;
+    padding: .75rem 1.5rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.16, 1, .3, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    letter-spacing: .01em;
 }
 
 .ob-btn--primary {
-    background: linear-gradient(135deg, var(--success-primary), var(--success-secondary));
+    background: linear-gradient(135deg, #2563EB, #7C3AED);
     color: #fff;
-    border: 1px solid transparent;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, .4), inset 0 1px 0 rgba(255, 255, 255, .15);
 }
 
-.ob-btn--primary:hover {
-    transform: translateY(-1px);
+.ob-btn--primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(37, 99, 235, .5), inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+.ob-btn--primary:active:not(:disabled) {
+    transform: translateY(0);
 }
 
 .ob-btn--ghost {
-    background: rgba(255, 255, 255, 0.06);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-default);
 }
 
 .ob-btn--ghost:hover {
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+    background: var(--bg-glass);
     transform: translateY(-1px);
-    background: rgba(255, 255, 255, 0.1);
 }
 
 .ob-btn--lg {
-    padding: 1rem 1.5rem;
+    padding: 1rem 2rem;
+    font-size: var(--text-base);
+    border-radius: var(--radius-lg);
 }
+
+/* ────────────────────────────────────────────────────────────
+   6. RESPONSIVE MEDIA QUERIES
+   ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 640px) {
     .success-shell {
         padding: 1.25rem;
     }
-    .s5-success__stats {
-        gap: 1rem;
+    
+    .s5-success {
+        padding: 2rem 1.25rem;
     }
+    
+    .s5-success__stats {
+        gap: 1.25rem;
+    }
+    
     .s5-success__icon-wrap {
         width: 86px;
         height: 86px;
