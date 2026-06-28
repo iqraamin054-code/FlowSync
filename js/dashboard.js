@@ -1,0 +1,613 @@
+/**
+ * FlowSync Dashboard Script
+ * Premium UX controls, dynamic preferences (theme, color, language, user data),
+ * and interactive custom SVG charts.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ────────────────────────────────────────────────────────────
+    // 1. STATE & STORAGE PREFERENCES
+    // ────────────────────────────────────────────────────────────
+
+    const preferences = {
+        theme: localStorage.getItem('flowsync-theme') || 'dark', // '' or 'dark' / 'light'
+        accent: localStorage.getItem('flowsync-accent') || 'blue',
+        language: localStorage.getItem('flowsync-language') || 'en',
+        username: localStorage.getItem('flowsync-username') || 'Alex R.',
+        company: localStorage.getItem('flowsync-company') || 'Synergy Analytics',
+        members: parseInt(localStorage.getItem('flowsync-team-members'), 10) || 1
+    };
+
+    // DOM Elements
+    const root = document.documentElement;
+    const dbThemeBtn = document.getElementById('db-theme-btn');
+    
+    // User profile elements
+    const usernameUpper = document.getElementById('username-upper');
+    const usernameLower = document.getElementById('username-lower');
+    const avatarUpper = document.getElementById('avatar-upper');
+    const avatarLower = document.getElementById('avatar-lower');
+    const dashboardHeading = document.getElementById('dashboard-heading');
+
+    // ────────────────────────────────────────────────────────────
+    // 2. THEME SYNCHRONIZATION
+    // ────────────────────────────────────────────────────────────
+
+    function applyTheme(theme) {
+        const attrVal = theme === 'light' ? 'light' : '';
+        root.setAttribute('data-theme', attrVal);
+        preferences.theme = theme;
+        localStorage.setItem('flowsync-theme', attrVal === 'light' ? 'light' : '');
+    }
+
+    // Initialize Theme — read raw localStorage value and normalize
+    const rawTheme = localStorage.getItem('flowsync-theme');
+    applyTheme(rawTheme === 'light' ? 'light' : 'dark');
+
+    // Theme Toggle Handler
+    if (dbThemeBtn) {
+        dbThemeBtn.addEventListener('click', () => {
+            const nextTheme = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            applyTheme(nextTheme);
+        });
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 3. ACCENT COLOR STYLING
+    // ────────────────────────────────────────────────────────────
+
+    function applyAccentColor(accentColor) {
+        const colorsMap = {
+            blue: { primary: '#2563EB', hover: '#1D4ED8', glow: 'rgba(37, 99, 235, 0.15)', rgb: '37, 99, 235' },
+            purple: { primary: '#7C3AED', hover: '#6D28D9', glow: 'rgba(124, 58, 237, 0.15)', rgb: '124, 58, 237' },
+            green: { primary: '#10B981', hover: '#059669', glow: 'rgba(16, 185, 129, 0.15)', rgb: '16, 185, 129' },
+            pink: { primary: '#EC4899', hover: '#DB2777', glow: 'rgba(236, 72, 153, 0.15)', rgb: '236, 72, 153' },
+            red: { primary: '#EF4444', hover: '#DC2626', glow: 'rgba(239, 68, 68, 0.15)', rgb: '239, 68, 68' }
+        };
+
+        const config = colorsMap[accentColor] || colorsMap.blue;
+        root.style.setProperty('--color-primary', config.primary);
+        root.style.setProperty('--color-primary-hover', config.hover);
+        root.style.setProperty('--shadow-glow-primary', config.glow);
+        root.style.setProperty('--color-primary-rgb', config.rgb);
+    }
+
+    // Initialize Accent Color
+    applyAccentColor(preferences.accent);
+
+    // ────────────────────────────────────────────────────────────
+    // 4. DYNAMIC USERNAME & COMPANY DATA
+    // ────────────────────────────────────────────────────────────
+
+    function getInitials(name) {
+        const parts = name.trim().split(/\s+/);
+        if (parts.length === 0) return 'FS';
+        if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function applyUserPreferences() {
+        // Names
+        if (usernameUpper) usernameUpper.textContent = preferences.username;
+        if (usernameLower) usernameLower.textContent = preferences.username;
+        
+        // Avatars
+        const initials = getInitials(preferences.username);
+        if (avatarUpper) avatarUpper.textContent = initials;
+        if (avatarLower) avatarLower.textContent = initials;
+
+        // Dropdown popover header profile info
+        const usernameDropdown = document.getElementById('username-dropdown');
+        const avatarDropdown = document.getElementById('avatar-dropdown');
+        if (usernameDropdown) usernameDropdown.textContent = preferences.username;
+        if (avatarDropdown) avatarDropdown.textContent = initials;
+
+        // Company
+        if (dashboardHeading) {
+            dashboardHeading.textContent = `FLOWSYNC • ${preferences.company.toUpperCase()} OVERVIEW`;
+        }
+    }
+
+    applyUserPreferences();
+
+    // ────────────────────────────────────────────────────────────
+    // 5. LOCALIZATION & TRANSLATIONS
+    // ────────────────────────────────────────────────────────────
+
+    const translations = {
+        en: {
+            dashboard: "Dashboard",
+            analytics: "Analytics",
+            projects: "Projects",
+            team: "Team",
+            messages: "Messages",
+            settings: "Settings",
+            active: "active",
+            activeUsers: "Active Users",
+            monthlyRevenue: "Monthly Revenue",
+            conversionRate: "Conversion Rate",
+            growth: "Growth",
+            growthTrends: "Platform Growth Trends",
+            projectStatus: "Project Status",
+            ongoingCount: "4 ongoing projects",
+            activityFeed: "Team Activity Feed",
+            globalView: "Global View",
+            localView: "Local View",
+            global: "Global",
+            local: "Local",
+            act1: "completed UK Sync",
+            act2: "pushed code to main now",
+            act3: "created report",
+            membersLabel: "Members",
+            workspaceLabel: "Workspace",
+            possibilitiesLabel: "Possibilities"
+        },
+        "en-gb": {
+            dashboard: "Dashboard",
+            analytics: "Analytics",
+            projects: "Projects",
+            team: "Team",
+            messages: "Messages",
+            settings: "Settings",
+            active: "active",
+            activeUsers: "Active Users",
+            monthlyRevenue: "Monthly Revenue",
+            conversionRate: "Conversion Rate",
+            growth: "Growth",
+            growthTrends: "Platform Growth Trends",
+            projectStatus: "Project Status",
+            ongoingCount: "4 ongoing projects",
+            activityFeed: "Team Activity Feed",
+            globalView: "Global View",
+            localView: "Local View",
+            global: "Global",
+            local: "Local",
+            act1: "completed UK Sync",
+            act2: "pushed code to main now",
+            act3: "created report",
+            membersLabel: "Members",
+            workspaceLabel: "Workspace",
+            possibilitiesLabel: "Possibilities"
+        },
+        de: {
+            dashboard: "Übersicht",
+            analytics: "Analysen",
+            projects: "Projekte",
+            team: "Team",
+            messages: "Nachrichten",
+            settings: "Einstellungen",
+            active: "aktiv",
+            activeUsers: "Aktive Benutzer",
+            monthlyRevenue: "Monatlicher Umsatz",
+            conversionRate: "Konversionsrate",
+            growth: "Wachstum",
+            growthTrends: "Plattform-Wachstumstrends",
+            projectStatus: "Projektstatus",
+            ongoingCount: "4 laufende Projekte",
+            activityFeed: "Aktivitäts-Feed",
+            globalView: "Globale Ansicht",
+            localView: "Lokale Ansicht",
+            global: "Global",
+            local: "Lokal",
+            act1: "hat UK-Sync abgeschlossen",
+            act2: "hat Code in Main gepusht",
+            act3: "hat Bericht erstellt",
+            membersLabel: "Mitglieder",
+            workspaceLabel: "Arbeitsbereich",
+            possibilitiesLabel: "Möglichkeiten"
+        },
+        fr: {
+            dashboard: "Tableau de Bord",
+            analytics: "Analyses",
+            projects: "Projets",
+            team: "Équipe",
+            messages: "Messages",
+            settings: "Paramètres",
+            active: "actif",
+            activeUsers: "Utilisateurs Actifs",
+            monthlyRevenue: "Revenu Mensuel",
+            conversionRate: "Taux de Conversion",
+            growth: "Croissance",
+            growthTrends: "Tendances de Croissance",
+            projectStatus: "Statut des Projets",
+            ongoingCount: "4 projets en cours",
+            activityFeed: "Flux d'Activité",
+            globalView: "Vue Globale",
+            localView: "Vue Locale",
+            global: "Global",
+            local: "Local",
+            act1: "a terminé la synchro UK",
+            act2: "a déployé le code sur main",
+            act3: "a créé un rapport",
+            membersLabel: "Membres",
+            workspaceLabel: "Espace",
+            possibilitiesLabel: "Possibilités"
+        },
+        es: {
+            dashboard: "Tablero",
+            analytics: "Analítica",
+            projects: "Proyectos",
+            team: "Equipo",
+            messages: "Mensajes",
+            settings: "Ajustes",
+            active: "activo",
+            activeUsers: "Usuarios Activos",
+            monthlyRevenue: "Ingresos Mensuales",
+            conversionRate: "Tasa de Conversión",
+            growth: "Crecimiento",
+            growthTrends: "Tendencias de Crecimiento",
+            projectStatus: "Estado de Proyectos",
+            ongoingCount: "4 proyectos en curso",
+            activityFeed: "Feed de Actividad",
+            globalView: "Vista Global",
+            localView: "Vista Local",
+            global: "Global",
+            local: "Local",
+            act1: "completó la sincronización UK",
+            act2: "subió código a main ahora",
+            act3: "creó un reporte",
+            membersLabel: "Miembros",
+            workspaceLabel: "Espacio",
+            possibilitiesLabel: "Posibilidades"
+        },
+        ja: {
+            dashboard: "ダッシュボード",
+            analytics: "分析",
+            projects: "プロジェクト",
+            team: "チーム",
+            messages: "メッセージ",
+            settings: "設定",
+            active: "アクティブ",
+            activeUsers: "アクティブユーザー",
+            monthlyRevenue: "月次収益",
+            conversionRate: "コンバージョン率",
+            growth: "成長率",
+            growthTrends: "成長トレンド",
+            projectStatus: "プロジェクト状況",
+            ongoingCount: "4つの進行中プロジェクト",
+            activityFeed: "チーム活動フィード",
+            globalView: "グローバル表示",
+            localView: "ローカル表示",
+            global: "グローバル",
+            local: "ローカル",
+            act1: "がUK同期を完了しました",
+            act2: "がコードをメインに反映しました",
+            act3: "がレポートを作成しました",
+            membersLabel: "メンバー",
+            workspaceLabel: "ワークスペース",
+            possibilitiesLabel: "可能性"
+        },
+        zh: {
+            dashboard: "仪表板",
+            analytics: "数据分析",
+            projects: "项目",
+            team: "团队",
+            messages: "消息",
+            settings: "设置",
+            active: "在线",
+            activeUsers: "活跃用户",
+            monthlyRevenue: "月收入",
+            conversionRate: "转化率",
+            growth: "增长率",
+            growthTrends: "平台增长趋势",
+            projectStatus: "项目状态",
+            ongoingCount: "4个进行中的项目",
+            activityFeed: "团队动态列表",
+            globalView: "全局视图",
+            localView: "本地视图",
+            global: "全局",
+            local: "本地",
+            act1: "完成了英国节点同步",
+            act2: "刚刚推送代码到主分支",
+            act3: "创建了新报告",
+            membersLabel: "成员",
+            workspaceLabel: "工作区",
+            possibilitiesLabel: "无限可能"
+        },
+        ar: {
+            dashboard: "لوحة التحكم",
+            analytics: "التحليلات",
+            projects: "المشاريع",
+            team: "الفريق",
+            messages: "الرسائل",
+            settings: "الإعدادات",
+            active: "نشط",
+            activeUsers: "المستخدمين النشطين",
+            monthlyRevenue: "الإيرادات الشهرية",
+            conversionRate: "معدل التحويل",
+            growth: "النمو",
+            growthTrends: "اتجاهات نمو المنصة",
+            projectStatus: "حالة المشاريع",
+            ongoingCount: "٤ مشاريع مستمرة",
+            activityFeed: "آخر نشاط للفريق",
+            globalView: "عرض عالمي",
+            localView: "عرض محلي",
+            global: "عالمي",
+            local: "محلي",
+            act1: "أكمل مزامنة المملكة المتحدة",
+            act2: "قام برفع الكود إلى الفرع الرئيسي",
+            act3: "أنشأ تقريرًا جديدًا",
+            membersLabel: "أعضاء",
+            workspaceLabel: "مساحة العمل",
+            possibilitiesLabel: "إمكانيات"
+        },
+        ur: {
+            dashboard: "ڈیش بورڈ",
+            analytics: "تجزیات",
+            projects: "پروجیکٹس",
+            team: "ٹیم",
+            messages: "پیغامات",
+            settings: "ترتیبات",
+            active: "آن لائن",
+            activeUsers: "فعال صارفین",
+            monthlyRevenue: "ماہانہ آمدنی",
+            conversionRate: "کنورژن ریٹ",
+            growth: "ترقی",
+            growthTrends: "پلیٹ فارم کی ترقی",
+            projectStatus: "منصوبوں کی صورتحال",
+            ongoingCount: "4 جاری منصوبے",
+            activityFeed: "ٹیم کی سرگرمیاں",
+            globalView: "عالمی تناظر",
+            localView: "مقامی تناظر",
+            global: "عالمی",
+            local: "مقامی",
+            act1: "نے یوکے سنک مکمل کر لیا",
+            act2: "نے کوڈ مین برانچ میں پش کر دیا",
+            act3: "نے نئی رپورٹ تیار کی",
+            membersLabel: "ارکان",
+            workspaceLabel: "کام کی جگہ",
+            possibilitiesLabel: "امکانات"
+        }
+    };
+
+    function translateUI(lang) {
+        const dict = translations[lang] || translations.en;
+        
+        // Helper to safely translate elements
+        // For nav links (which have SVG children), target the .nav-text span
+        const t = (id, key) => {
+            const el = document.getElementById(id);
+            if (el && dict[key]) {
+                const navText = el.querySelector('.nav-text');
+                if (navText) {
+                    navText.textContent = dict[key];
+                } else {
+                    el.textContent = dict[key];
+                }
+            }
+        };
+
+        const tClass = (selector, key) => {
+            const el = document.querySelector(selector);
+            if (el && dict[key]) el.textContent = dict[key];
+        };
+
+        // Navigation links
+        t("nav-dashboard", "dashboard");
+        t("nav-analytics", "analytics");
+        t("nav-projects", "projects");
+        t("nav-team", "team");
+        t("nav-messages", "messages");
+        t("nav-settings", "settings");
+
+        // Profile active labels
+        const statusLabels = document.querySelectorAll(".profile-status");
+        statusLabels.forEach(el => el.textContent = dict.active);
+
+        // Scope
+        t("scope-status", "global");
+
+        // KPI Widget Titles
+        t("m1-title", "activeUsers");
+        t("m2-title", "monthlyRevenue");
+        t("m3-title", "conversionRate");
+        t("m4-title", "growth");
+
+        // Panel Titles
+        tClass("#chart-heading", "growthTrends");
+        tClass("#project-heading", "projectStatus");
+        t("ongoing-projects-count", "ongoingCount");
+        tClass("#activity-heading", "activityFeed");
+        
+        // Feed Items
+        t("act-1", "act1");
+        t("act-2", "act2");
+        t("act-3", "act3");
+    }
+
+    // Initialize UI language translation
+    translateUI(preferences.language);
+
+    // ────────────────────────────────────────────────────────────
+    // 5b. LANGUAGE SELECTOR HANDLER
+    // ────────────────────────────────────────────────────────────
+    const langSelector = document.getElementById("lang-selector");
+    if (langSelector) {
+        langSelector.value = preferences.language;
+        langSelector.addEventListener('change', (e) => {
+            const val = e.target.value;
+            preferences.language = val;
+            localStorage.setItem('flowsync-language', val);
+            translateUI(val);
+        });
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 5c. MOBILE & DESKTOP HAMBURGER SIDEBAR TOGGLE
+    // ────────────────────────────────────────────────────────────
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const sidebar = document.querySelector('.db-sidebar');
+
+    function openSidebar() {
+        if (sidebar) {
+            sidebar.classList.add('is-open');
+            sidebar.classList.remove('is-closed');
+        }
+        if (sidebarOverlay) sidebarOverlay.classList.add('is-visible');
+        if (hamburgerBtn) {
+            hamburgerBtn.setAttribute('aria-expanded', 'true');
+            hamburgerBtn.classList.add('is-hidden'); // Hide the hamburger sign
+        }
+    }
+
+    // Explicitly handles closing the sidebar
+    function closeSidebar() {
+        if (sidebar) {
+            sidebar.classList.remove('is-open');
+            sidebar.classList.add('is-closed');
+        }
+        if (sidebarOverlay) sidebarOverlay.classList.remove('is-visible');
+        if (hamburgerBtn) {
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            hamburgerBtn.classList.remove('is-hidden'); // Show the hamburger sign
+        }
+    }
+
+    // Hamburger is mobile-only: on desktop sidebar is always open
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Only toggle on mobile (hamburger is hidden on desktop via CSS)
+            const isOpen = sidebar && sidebar.classList.contains('is-open');
+            if (isOpen) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if (sidebarCloseBtn) {
+        sidebarCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeSidebar();
+        });
+    }
+
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+
+    // On resize to desktop: reset any mobile open/close state
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) {
+            // Desktop: sidebar is always visible, clear mobile state
+            if (sidebar) {
+                sidebar.classList.remove('is-open');
+                sidebar.classList.remove('is-closed');
+            }
+            if (sidebarOverlay) sidebarOverlay.classList.remove('is-visible');
+        }
+    });
+
+    // ────────────────────────────────────────────────────────────
+    // 5d. UPPER PROFILE DROPDOWN POPMENU & LOGOUT
+    // ────────────────────────────────────────────────────────────
+    const profileUpper = document.getElementById('sidebar-profile-upper');
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const dropdownLogout = document.getElementById('dropdown-logout');
+
+    if (profileUpper && profileDropdown) {
+        profileUpper.addEventListener('click', (e) => {
+            // The option does not show when clicking the notification/alert icon
+            if (e.target.closest('.profile-alert-icon')) {
+                return;
+            }
+            e.stopPropagation();
+            profileDropdown.classList.toggle('is-active');
+        });
+
+        // Prevent click events inside the dropdown from propagating up to profileUpper,
+        // which would otherwise close it immediately.
+        profileDropdown.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+            profileDropdown.classList.remove('is-active');
+        });
+    }
+
+    if (dropdownLogout) {
+        dropdownLogout.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            // Redirect to landing page (index.html is at root directory)
+            window.location.href = 'index.html';
+        });
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 6. SVG LINE CHART TOOLTIP INTERACTION
+    // ────────────────────────────────────────────────────────────
+
+    const trendsChartContainer = document.getElementById('trends-chart-container');
+    const chartTooltip = document.getElementById('chart-tooltip');
+    
+    if (trendsChartContainer && chartTooltip) {
+        const hotspots = trendsChartContainer.querySelectorAll('.chart-hotspot');
+        
+        hotspots.forEach(spot => {
+            spot.addEventListener('mouseenter', (e) => {
+                const cx = parseFloat(spot.getAttribute('cx'));
+                const cy = parseFloat(spot.getAttribute('cy'));
+                const strokeColor = spot.getAttribute('fill');
+
+                // Values based on coordinate
+                let usersVal = "950";
+                let trialsVal = "750";
+                let dateVal = "Sept 21";
+
+                if (cx === 310) {
+                    dateVal = "Aug 15";
+                    usersVal = "1,120";
+                    trialsVal = "550";
+                } else if (cx === 440 && strokeColor === '#10B981') {
+                    dateVal = "Sept 21";
+                    usersVal = "980";
+                    trialsVal = "790";
+                } else if (cx === 440 && strokeColor === '#7C3AED') {
+                    dateVal = "Sept 21";
+                    usersVal = "980";
+                    trialsVal = "580";
+                } else if (cx === 440) {
+                    dateVal = "Sept 21";
+                    usersVal = "1,040";
+                    trialsVal = "750";
+                }
+
+                // Inject data to tooltip
+                document.getElementById('tt-date').textContent = dateVal;
+                document.getElementById('tt-val-users').textContent = usersVal;
+                document.getElementById('tt-val-trials').textContent = trialsVal;
+
+                // Show tooltip and position it near hotspot (percentage calculations for responsiveness)
+                const widthPercent = (cx / 600) * 100;
+                const heightPercent = (cy / 320) * 100;
+
+                chartTooltip.style.left = `calc(${widthPercent}% - 60px)`;
+                chartTooltip.style.top = `calc(${heightPercent}% - 90px)`;
+                chartTooltip.classList.add('is-visible');
+            });
+
+            spot.addEventListener('mouseleave', () => {
+                chartTooltip.classList.remove('is-visible');
+            });
+        });
+    }
+
+    // Ripple effects for cards
+    const rippleCards = document.querySelectorAll('.ripple');
+    rippleCards.forEach(card => {
+        card.addEventListener('mousedown', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--ripple-x', `${x}%`);
+            card.style.setProperty('--ripple-y', `${y}%`);
+        });
+    });
+});

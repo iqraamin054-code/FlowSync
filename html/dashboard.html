@@ -1,22 +1,613 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FlowSync | Dashboard Preview</title>
+    <title>FlowSync | Dashboard</title>
+    <meta name="description" content="View analytics, team activities, and ongoing projects on your FlowSync workspace.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/dashboard.css">
-    <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
 <body>
 
-    <script src="js/dashboard.js"></script>
+    <!-- Animated Background Orbs -->
+    <div class="db-bg" aria-hidden="true">
+        <div class="db-bg__orb db-bg__orb--1"></div>
+        <div class="db-bg__orb db-bg__orb--2"></div>
+        <div class="db-bg__grid"></div>
+    </div>
+
+    <!-- Sidebar Overlay (click to close on mobile) -->
+    <div class="sidebar-overlay" id="sidebar-overlay" aria-hidden="true"></div>
+
+    <!-- Dashboard Main Wrapper -->
+    <div class="db-wrapper">
+
+        <!-- Sidebar Navigation -->
+        <aside class="db-sidebar" aria-label="Sidebar navigation">
+            <!-- Sidebar Header / Logo -->
+            <div class="sidebar-header">
+                <a href="index.html" class="db-logo" aria-label="FlowSync Home">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                        <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#dbLogoGrad)" />
+                        <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path d="M14 9V19" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+                        <defs>
+                            <linearGradient id="dbLogoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="var(--color-primary, #2563EB)" />
+                                <stop offset="1" stop-color="var(--color-secondary, #7C3AED)" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="db-logo__text">FlowSync</span>
+                </a>
+                <!-- Close button (visible when sidebar is open on mobile) -->
+                <button class="sidebar-close-btn" id="sidebar-close-btn" aria-label="Close sidebar">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Profile Overview (Upper) -->
+            <div class="sidebar-profile" id="sidebar-profile-upper" style="position: relative; cursor: pointer;">
+                <div class="profile-avatar-wrap">
+                    <div class="profile-avatar" id="avatar-upper">AR</div>
+                    <span class="status-indicator active" aria-label="Active status"></span>
+                </div>
+                <div class="profile-info">
+                    <span class="profile-name" id="username-upper">Alex R.</span>
+                    <span class="profile-status" id="status-label">active</span>
+                </div>
+                <div class="profile-alert-icon">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                    </svg>
+                    <span class="alert-dot"></span>
+                </div>
+
+                <!-- Dropdown Popover Menu (Hidden by default, matches user request screenshot) -->
+                <div class="profile-dropdown glass-card" id="profile-dropdown" aria-label="User menu">
+                    <div class="profile-dropdown-header">
+                        <div class="profile-avatar" id="avatar-dropdown">AR</div>
+                        <div class="profile-dropdown-info">
+                            <span class="profile-dropdown-name" id="username-dropdown">Alex R.</span>
+                            <span class="profile-dropdown-sub">Free</span>
+                        </div>
+                        <svg class="chevron-right" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <ul class="dropdown-menu-list">
+                        <li class="dropdown-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                            </svg>
+                            <span>Try Plus free</span>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            <span>Personalization</span>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Profile</span>
+                        </li>
+                        <li class="dropdown-menu-item">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span>Settings</span>
+                        </li>
+                    </ul>
+                    <div class="dropdown-divider"></div>
+                    <ul class="dropdown-menu-list">
+                        <li class="dropdown-menu-item" style="justify-content: space-between; display: flex; width: 100%;">
+                            <div style="display: flex; align-items: center; gap: 0.65rem;">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                </svg>
+                                <span>Help</span>
+                            </div>
+                            <svg class="chevron-right" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </li>
+                        <li class="dropdown-menu-item dropdown-logout-btn" id="dropdown-logout">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>Log out</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="sidebar-nav" aria-label="Main menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="dashboard.html" class="nav-link nav-link--active" id="nav-dashboard">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-analytics">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="20" x2="18" y2="10"/>
+                                <line x1="12" y1="20" x2="12" y2="4"/>
+                                <line x1="6" y1="20" x2="6" y2="14"/>
+                            </svg>
+                            <span class="nav-text">Analytics</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-projects">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="nav-text">Projects</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-team">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span class="nav-text">Team</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-messages">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="nav-text">Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" id="nav-settings">
+                            <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                            <span class="nav-text">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Profile Overview (Lower/Footer) -->
+            <div class="sidebar-footer">
+                <div class="sidebar-profile sidebar-profile--mini">
+                    <div class="profile-avatar-wrap">
+                        <div class="profile-avatar" id="avatar-lower">AR</div>
+                        <span class="status-indicator active"></span>
+                    </div>
+                    <div class="profile-info">
+                        <span class="profile-name" id="username-lower">Alex R.</span>
+                        <span class="profile-status">active</span>
+                    </div>
+                    <div class="profile-alert-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="alert-dot"></span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Panel -->
+        <main class="db-main" role="main" aria-label="Workspace dashboard">
+
+            <!-- Top Header Bar -->
+            <header class="db-header">
+                <!-- Hamburger button (always visible, opens sidebar) -->
+                <button class="hamburger-btn" id="hamburger-btn" aria-label="Open sidebar" aria-expanded="false">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <line x1="3" y1="6" x2="21" y2="6"/>
+                        <line x1="3" y1="12" x2="21" y2="12"/>
+                        <line x1="3" y1="18" x2="21" y2="18"/>
+                    </svg>
+                </button>
+                <!-- Search -->
+                <div class="header-search">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon">
+                        <circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="search" placeholder="Search..." id="search-input" aria-label="Search dashboard">
+                </div>
+
+                <!-- Header Actions Control -->
+                <div class="header-actions">
+                    <button class="header-btn" aria-label="Notifications" id="btn-notifications">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                        </svg>
+                        <span class="badge badge--danger"></span>
+                    </button>
+                    <button class="header-btn" aria-label="Inbox" id="btn-inbox">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                    </button>
+
+                    <!-- Date Range Widget -->
+                    <button class="header-date" id="date-range-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        <span id="date-label">Sept 21 - Oct 20</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+
+                    <!-- Language Selector -->
+                    <div class="header-dropdown-wrap lang-dropdown-wrap">
+                        <svg class="lang-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                        <select class="header-dropdown" id="lang-selector" aria-label="Language selector">
+                            <option value="en">English</option>
+                            <option value="en-gb">English (UK)</option>
+                            <option value="de">Deutsch</option>
+                            <option value="fr">Français</option>
+                            <option value="es">Español</option>
+                            <option value="ja">日本語</option>
+                            <option value="zh">中文</option>
+                            <option value="ar">العربية</option>
+                            <option value="ur">اردو</option>
+                        </select>
+                    </div>
+
+                    <!-- Theme Toggle Button -->
+                    <button class="db-theme-toggle" id="db-theme-btn" aria-label="Toggle theme">
+                        <svg class="db-theme-icon db-theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                        </svg>
+                        <svg class="db-theme-icon db-theme-icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content Container -->
+            <div class="db-content">
+
+                <!-- Header Title Row -->
+                <div class="db-title-row">
+                    <h1 class="db-title" id="dashboard-heading">FLOWSYNC • WORKSPACE OVERVIEW</h1>
+                    <div class="db-badge-tag">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span id="scope-status">Global</span>
+                    </div>
+                </div>
+
+                <!-- 4 Metrics Cards Grid -->
+                <div class="metrics-grid">
+                    <!-- Metric Card 1: Active Users -->
+                    <div class="metric-card glass-card ripple">
+                        <div class="m-card__header">
+                            <span class="m-card__title" id="m1-title">Active Users</span>
+                            <span class="m-badge m-badge--success">+12%</span>
+                        </div>
+                        <div class="m-card__value">18,450</div>
+                        <div class="m-card__chart">
+                            <!-- SVG Sparkline (Green) -->
+                            <svg class="sparkline-svg" viewBox="0 0 120 40">
+                                <defs>
+                                    <linearGradient id="sparkGradGreen" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"></stop>
+                                        <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 0 35 Q 15 28 30 32 T 60 22 T 90 28 T 120 10 L 120 40 L 0 40 Z" fill="url(#sparkGradGreen)"></path>
+                                <path d="M 0 35 Q 15 28 30 32 T 60 22 T 90 28 T 120 10" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Metric Card 2: Monthly Revenue -->
+                    <div class="metric-card glass-card ripple">
+                        <div class="m-card__header">
+                            <span class="m-card__title" id="m2-title">Monthly Revenue</span>
+                            <span class="m-badge m-badge--blue">+8%</span>
+                        </div>
+                        <div class="m-card__value">$94,201</div>
+                        <div class="m-card__chart">
+                            <!-- SVG Bar Sparkline (Blue) -->
+                            <svg class="sparkline-svg" viewBox="0 0 120 40">
+                                <g fill="var(--color-primary, #2563EB)" opacity="0.85">
+                                    <rect x="5" y="24" width="8" height="16" rx="2"></rect>
+                                    <rect x="20" y="18" width="8" height="22" rx="2"></rect>
+                                    <rect x="35" y="26" width="8" height="14" rx="2"></rect>
+                                    <rect x="50" y="14" width="8" height="26" rx="2"></rect>
+                                    <rect x="65" y="20" width="8" height="20" rx="2"></rect>
+                                    <rect x="80" y="10" width="8" height="30" rx="2"></rect>
+                                    <rect x="95" y="16" width="8" height="24" rx="2"></rect>
+                                    <rect x="110" y="6" width="8" height="34" rx="2"></rect>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Metric Card 3: Conversion Rate -->
+                    <div class="metric-card glass-card ripple">
+                        <div class="m-card__header">
+                            <span class="m-card__title" id="m3-title">Conversion Rate</span>
+                            <span class="m-badge m-badge--purple">+3.1%</span>
+                        </div>
+                        <div class="m-card__content-row">
+                            <div class="m-card__value">4.8%</div>
+                            <div class="m-card__circular">
+                                <!-- Donut Progress Meter -->
+                                <svg width="44" height="44" viewBox="0 0 36 36">
+                                    <circle class="donut-track" cx="18" cy="18" r="15.915" fill="transparent" stroke="var(--border-strong)" stroke-width="3"></circle>
+                                    <circle class="donut-segment" cx="18" cy="18" r="15.915" fill="transparent" stroke="#7C3AED" stroke-width="3.5" stroke-dasharray="72 28" stroke-dashoffset="25"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metric Card 4: Growth -->
+                    <div class="metric-card glass-card ripple">
+                        <div class="m-card__header">
+                            <span class="m-card__title" id="m4-title">Growth</span>
+                            <span class="m-badge m-badge--yellow">+5.2%</span>
+                        </div>
+                        <div class="m-card__value">+24%</div>
+                        <div class="m-card__chart">
+                            <!-- SVG Sparkline (Yellow - upward trend for growth) -->
+                            <svg class="sparkline-svg" viewBox="0 0 120 40">
+                                <defs>
+                                    <linearGradient id="sparkGradYellow" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3"></stop>
+                                        <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.0"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <path d="M 0 34 Q 30 28 60 20 T 100 10 T 120 6 L 120 40 L 0 40 Z" fill="url(#sparkGradYellow)"></path>
+                                <path d="M 0 34 Q 30 28 60 20 T 100 10 T 120 6" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="content-grid">
+
+                    <!-- Left: Platform Growth Trends -->
+                    <section class="grid-panel main-chart glass-card" aria-labelledby="chart-heading">
+                        <header class="panel-header">
+                            <h2 class="panel-title" id="chart-heading">Platform Growth Trends</h2>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="legend-dot" style="background: #2563EB;"></span>Users</span>
+                                <span class="legend-item"><span class="legend-dot" style="background: #10B981;"></span>Sales</span>
+                                <span class="legend-item"><span class="legend-dot" style="background: #7C3AED;"></span>Trials</span>
+                            </div>
+                        </header>
+
+                        <!-- High-Fidelity SVG Interactive Chart -->
+                        <div class="chart-container" id="trends-chart-container">
+                            <svg class="main-chart-svg" viewBox="0 0 600 320" preserveAspectRatio="none">
+                                <defs>
+                                    <!-- Gradients for paths -->
+                                    <linearGradient id="chartBlueGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"></stop>
+                                        <stop offset="100%" stop-color="#2563EB" stop-opacity="0.0"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="chartGreenGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#10B981" stop-opacity="0.25"></stop>
+                                        <stop offset="100%" stop-color="#10B981" stop-opacity="0.0"></stop>
+                                    </linearGradient>
+                                    <linearGradient id="chartPurpleGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.25"></stop>
+                                        <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.0"></stop>
+                                    </linearGradient>
+                                </defs>
+
+                                <!-- Grid lines -->
+                                <g stroke="var(--border-subtle)" stroke-width="1" opacity="0.7">
+                                    <line x1="50" y1="20" x2="570" y2="20"></line>
+                                    <line x1="50" y1="70" x2="570" y2="70"></line>
+                                    <line x1="50" y1="120" x2="570" y2="120"></line>
+                                    <line x1="50" y1="170" x2="570" y2="170"></line>
+                                    <line x1="50" y1="220" x2="570" y2="220"></line>
+                                    <line x1="50" y1="270" x2="570" y2="270"></line>
+                                    
+                                    <line x1="50" y1="20" x2="50" y2="270"></line>
+                                    <line x1="180" y1="20" x2="180" y2="270"></line>
+                                    <line x1="310" y1="20" x2="310" y2="270"></line>
+                                    <line x1="440" y1="20" x2="440" y2="270"></line>
+                                    <line x1="570" y1="20" x2="570" y2="270"></line>
+                                </g>
+
+                                <!-- Y Axis Labels -->
+                                <g fill="var(--text-secondary)" font-size="10" font-family="var(--font-num)" text-anchor="end">
+                                    <text x="40" y="24">1400</text>
+                                    <text x="40" y="74">1200</text>
+                                    <text x="40" y="124">1000</text>
+                                    <text x="40" y="174">800</text>
+                                    <text x="40" y="224">400</text>
+                                    <text x="40" y="274">0</text>
+                                </g>
+
+                                <!-- Curves Area Fills -->
+                                <path d="M 50 240 Q 115 200 180 180 T 310 90 T 440 180 T 570 80 L 570 270 L 50 270 Z" fill="url(#chartBlueGrad)"></path>
+                                <path d="M 50 260 Q 115 220 180 200 T 310 130 T 440 120 T 570 100 L 570 270 L 50 270 Z" fill="url(#chartGreenGrad)"></path>
+                                <path d="M 50 270 Q 115 240 180 230 T 310 220 T 440 210 T 570 140 L 570 270 L 50 270 Z" fill="url(#chartPurpleGrad)"></path>
+
+                                <!-- Stroke lines (Neon Glow Paths) -->
+                                <path class="glow-line" d="M 50 240 Q 115 200 180 180 T 310 90 T 440 180 T 570 80" fill="none" stroke="#2563EB" stroke-width="3" stroke-linecap="round"></path>
+                                <path class="glow-line" d="M 50 260 Q 115 220 180 200 T 310 130 T 440 120 T 570 100" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round"></path>
+                                <path class="glow-line" d="M 50 270 Q 115 240 180 230 T 310 220 T 440 210 T 570 140" fill="none" stroke="#7C3AED" stroke-width="3" stroke-linecap="round"></path>
+
+                                <!-- X Axis Labels -->
+                                <g fill="var(--text-secondary)" font-size="10" font-family="var(--font-num)" text-anchor="middle">
+                                    <text x="50" y="295">Jun</text>
+                                    <text x="180" y="295">Jul</text>
+                                    <text x="310" y="295">Aug</text>
+                                    <text x="440" y="295">Sep</text>
+                                    <text x="570" y="295">Oct</text>
+                                </g>
+
+                                <!-- Hotspot interactive circles -->
+                                <circle cx="310" cy="90" r="5" fill="#2563EB" stroke="white" stroke-width="2" class="chart-hotspot"></circle>
+                                <circle cx="440" cy="120" r="5" fill="#10B981" stroke="white" stroke-width="2" class="chart-hotspot"></circle>
+                                <circle cx="440" cy="210" r="5" fill="#7C3AED" stroke="white" stroke-width="2" class="chart-hotspot"></circle>
+                            </svg>
+
+                            <!-- Tooltip Modal Popup (Matches image popup for Sept 21) -->
+                            <div class="chart-tooltip" id="chart-tooltip">
+                                <div class="tooltip-header" id="tt-date">Sept 21</div>
+                                <div class="tooltip-row">
+                                    <span class="tooltip-dot" style="background:#2563EB;"></span>
+                                    <span class="tooltip-label" id="tt-label-users">Users:</span>
+                                    <span class="tooltip-val" id="tt-val-users">950</span>
+                                </div>
+                                <div class="tooltip-row">
+                                    <span class="tooltip-dot" style="background:#7C3AED;"></span>
+                                    <span class="tooltip-label" id="tt-label-trials">Trials:</span>
+                                    <span class="tooltip-val" id="tt-val-trials">750</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Right: Projects and Activity -->
+                    <div class="right-column">
+                        <!-- Project Status -->
+                        <section class="grid-panel project-status glass-card" aria-labelledby="project-heading">
+                            <header class="panel-header">
+                                <h2 class="panel-title" id="project-heading">Project Status</h2>
+                                <span class="panel-sub" id="ongoing-projects-count">4 ongoing projects</span>
+                            </header>
+
+                            <div class="project-list">
+                                <!-- Project 1 -->
+                                <div class="project-item">
+                                    <div class="project-info">
+                                        <span class="project-name">Project Nebula</span>
+                                        <span class="project-progress-val">88%</span>
+                                    </div>
+                                    <div class="project-progress-bar">
+                                        <div class="project-progress-fill" style="width: 88%; background: #10B981; box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);"></div>
+                                    </div>
+                                </div>
+                                <!-- Project 2 -->
+                                <div class="project-item">
+                                    <div class="project-info">
+                                        <span class="project-name">Project Quantum</span>
+                                        <span class="project-progress-val">64%</span>
+                                    </div>
+                                    <div class="project-progress-bar">
+                                        <div class="project-progress-fill" style="width: 64%; background: #7C3AED; box-shadow: 0 0 10px rgba(124, 58, 237, 0.4);"></div>
+                                    </div>
+                                </div>
+                                <!-- Project 3 (Matches Accent Color) -->
+                                <div class="project-item">
+                                    <div class="project-info">
+                                        <span class="project-name">Project Horizon</span>
+                                        <span class="project-progress-val">42%</span>
+                                    </div>
+                                    <div class="project-progress-bar">
+                                        <div class="project-progress-fill" style="width: 42%; background: var(--color-primary, #2563EB); box-shadow: 0 0 10px var(--shadow-glow-primary);"></div>
+                                    </div>
+                                </div>
+                                <!-- Project 4 -->
+                                <div class="project-item">
+                                    <div class="project-info">
+                                        <span class="project-name">Project Aurora</span>
+                                        <span class="project-progress-val">75%</span>
+                                    </div>
+                                    <div class="project-progress-bar">
+                                        <div class="project-progress-fill" style="width: 75%; background: #EC4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.4);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Team Activity Feed -->
+                        <section class="grid-panel team-activity glass-card" aria-labelledby="activity-heading">
+                            <header class="panel-header">
+                                <h2 class="panel-title" id="activity-heading">Team Activity Feed</h2>
+                                <button class="action-btn" aria-label="More options">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+                                </button>
+                            </header>
+
+                            <div class="feed-list">
+                                <!-- Activity 1 -->
+                                <div class="feed-item">
+                                    <div class="feed-avatar" style="background-color: rgba(56, 189, 248, 0.15); color: #0EA5E9;">SL</div>
+                                    <div class="feed-content">
+                                        <p class="feed-text"><strong class="feed-author">Sarah L.</strong> <span id="act-1">completed UK Sync</span></p>
+                                        <span class="feed-time">2m ago</span>
+                                    </div>
+                                </div>
+                                <!-- Activity 2 -->
+                                <div class="feed-item">
+                                    <div class="feed-avatar" style="background-color: rgba(245, 158, 11, 0.15); color: #F59E0B;">MK</div>
+                                    <div class="feed-content">
+                                        <p class="feed-text"><strong class="feed-author">Mark K.</strong> <span id="act-2">pushed code to main now</span></p>
+                                        <span class="feed-time">15m ago</span>
+                                    </div>
+                                </div>
+                                <!-- Activity 3 -->
+                                <div class="feed-item">
+                                    <div class="feed-avatar" style="background-color: rgba(236, 72, 153, 0.15); color: #EC4899;">ER</div>
+                                    <div class="feed-content">
+                                        <p class="feed-text"><strong class="feed-author">Emily R.</strong> <span id="act-3">created report</span></p>
+                                        <span class="feed-time">31m ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                </div><!-- /content-grid -->
+
+            </div><!-- /db-content -->
+        </main>
+    </div>
+
+    <script src="../js/dashboard.js"></script>
 </body>
+
 </html>

@@ -523,8 +523,12 @@ document.addEventListener('DOMContentLoaded', () => {
             loadingView.style.transition = 'opacity .4s ease';
             
             setTimeout(() => {
-                // Save team member count (including the user) to localStorage
+                // Save onboarding choices (username, company name, accent color, language, team members) to localStorage
                 localStorage.setItem('flowsync-team-members', onboardingState.teamMembers.length + 1);
+                localStorage.setItem('flowsync-username', onboardingState.fullName);
+                localStorage.setItem('flowsync-company', onboardingState.companyName);
+                localStorage.setItem('flowsync-accent', onboardingState.accentColor);
+                localStorage.setItem('flowsync-language', onboardingState.language);
                 
                 // Redirect to success.html
                 window.location.href = 'success.html';
