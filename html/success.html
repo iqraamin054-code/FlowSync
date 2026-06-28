@@ -1,21 +1,54 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>FlowSync | Success</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/onboarding.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/success.css">
 </head>
 <body>
-
-    <script src="js/onboarding.js"></script>
+    <div class="success-shell">
+        <div class="success-panel">
+            <div class="success-card">
+                <div class="s5-success" aria-live="polite">
+                    <div class="s5-success__icon-wrap">
+                        <div class="s5-success__ring"></div>
+                        <div class="s5-success__icon">
+                            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                        </div>
+                    </div>
+                    <h1 class="s5-success__title" id="s5-title">Welcome to FlowSync! <span class="s5-success__emoji" aria-hidden="true">🎉</span></h1>
+                    <p class="s5-success__sub">Your workspace has been successfully created. Everything is ready — let's build something great.</p>
+                    <div class="s5-success__stats">
+                        <div class="s5-stat">
+                            <span class="s5-stat__val" id="stat-members">1</span>
+                            <span class="s5-stat__label">Members</span>
+                        </div>
+                        <div class="s5-stat">
+                            <span class="s5-stat__val">1</span>
+                            <span class="s5-stat__label">Workspace</span>
+                        </div>
+                        <div class="s5-stat">
+                            <span class="s5-stat__val">∞</span>
+                            <span class="s5-stat__label">Possibilities</span>
+                        </div>
+                    </div>
+                    <div class="s5-success__actions">
+                        <a href="dashboard.html" class="ob-btn ob-btn--primary ob-btn--lg ripple" id="open-dashboard">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                            Open Dashboard
+                        </a>
+                        <a href="index.html" class="ob-btn ob-btn--ghost ripple" id="back-to-landing">Back to Landing Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+    <script src="../js/success.js"></script>
 </body>
 </html>
