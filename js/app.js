@@ -139,6 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ---- Interactive Dashboard (Problem → Solution) ---- */
     const probCards = document.querySelectorAll('.problem-card[data-hover]');
     const dashWrapper = document.getElementById('interactive-dash');
+    const dashSearchInput = document.getElementById('dash-search-input');
+    const dashStateLabels = {
+        projects: 'Project Workspace',
+        automation: 'Automation Center',
+        analytics: 'Business Analytics'
+    };
     let dashDebounce = null;
     let dashAnimating = false;
     let dashCurrentState = null;
@@ -234,6 +240,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         dashWrapper.setAttribute('data-dash-state', state);
                     }
                     dashCurrentState = state;
+
+                    // Update search placeholder to reflect current section
+                    if (dashSearchInput) {
+                        dashSearchInput.placeholder = state ? (dashStateLabels[state] || 'Overview') : 'Overview';
+                    }
 
                     // Reset counters to 0 before animating
                     const newStats = statsContainer.querySelectorAll('.stat-value[data-target]');
