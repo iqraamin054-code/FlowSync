@@ -1,21 +1,605 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>FlowSync | Onboarding</title>
+    <title>FlowSync | Get Started — Set Up Your Workspace</title>
+    <meta name="description" content="Set up your FlowSync workspace in minutes. Tell us about your team, invite members, and configure your preferences to get started.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/onboarding.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/onboarding.css">
 </head>
+
 <body>
 
-    <script src="js/onboarding.js"></script>
+    <!-- Animated Background -->
+    <div class="ob-bg" aria-hidden="true">
+        <div class="ob-bg__orb ob-bg__orb--1"></div>
+        <div class="ob-bg__orb ob-bg__orb--2"></div>
+        <div class="ob-bg__orb ob-bg__orb--3"></div>
+        <div class="ob-bg__grid"></div>
+    </div>
+
+    <!-- Confetti Canvas (Step 5) -->
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <!-- Main Onboarding Shell -->
+    <main class="ob-shell" id="onboarding-main" role="main" aria-label="Onboarding wizard">
+
+        <!-- Header Bar -->
+        <header class="ob-header">
+            <a href="index.html" class="ob-logo" aria-label="FlowSync Home">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+                    <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#obLogoGrad)" />
+                    <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M14 9V19" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+                    <defs>
+                        <linearGradient id="obLogoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#2563EB" />
+                            <stop offset="1" stop-color="#7C3AED" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="ob-logo__text">FlowSync</span>
+            </a>
+
+            <div class="ob-header__right">
+                <span class="ob-step-label" id="step-label" aria-live="polite">Step 1 of 5</span>
+                <button class="ob-theme-toggle" id="ob-theme-btn" aria-label="Toggle theme">
+                    <svg class="ob-theme-icon ob-theme-icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                    <svg class="ob-theme-icon ob-theme-icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <!-- Progress Bar -->
+        <nav class="ob-progress" aria-label="Onboarding progress">
+            <div class="ob-progress__track">
+                <div class="ob-progress__fill" id="progress-fill" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <ol class="ob-steps" id="ob-steps">
+                <li class="ob-step ob-step--active" data-step="1" aria-current="step">
+                    <div class="ob-step__dot">
+                        <span class="ob-step__num">1</span>
+                        <svg class="ob-step__check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="ob-step__label">Welcome</span>
+                </li>
+                <li class="ob-step" data-step="2">
+                    <div class="ob-step__dot">
+                        <span class="ob-step__num">2</span>
+                        <svg class="ob-step__check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="ob-step__label">Company</span>
+                </li>
+                <li class="ob-step" data-step="3">
+                    <div class="ob-step__dot">
+                        <span class="ob-step__num">3</span>
+                        <svg class="ob-step__check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="ob-step__label">Team</span>
+                </li>
+                <li class="ob-step" data-step="4">
+                    <div class="ob-step__dot">
+                        <span class="ob-step__num">4</span>
+                        <svg class="ob-step__check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="ob-step__label">Preferences</span>
+                </li>
+                <li class="ob-step" data-step="5">
+                    <div class="ob-step__dot">
+                        <span class="ob-step__num">5</span>
+                        <svg class="ob-step__check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    <span class="ob-step__label">Complete</span>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Steps Viewport -->
+        <div class="ob-viewport" id="ob-viewport" aria-live="polite">
+
+            <!-- ══════════════════════════════════════ -->
+            <!--  STEP 1 — Welcome                     -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="ob-panel ob-panel--active" id="step-1" data-step="1" aria-labelledby="s1-title">
+                <div class="ob-card glass-card">
+                    <div class="ob-card__head">
+                        <div class="ob-badge">👋 Welcome</div>
+                        <h1 class="ob-card__title" id="s1-title">How will you use FlowSync?</h1>
+                        <p class="ob-card__sub">Choose the option that best describes you. We'll personalise your workspace accordingly.</p>
+                    </div>
+
+                    <div class="s1-grid" role="group" aria-label="Workspace type selection">
+                        <button class="s1-card" id="type-startup" data-value="startup" aria-pressed="false">
+                            <div class="s1-card__icon">🚀</div>
+                            <div class="s1-card__body">
+                                <h3 class="s1-card__name">Startup</h3>
+                                <p class="s1-card__desc">Early-stage team moving fast</p>
+                            </div>
+                            <div class="s1-card__check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </button>
+
+                        <button class="s1-card" id="type-agency" data-value="agency" aria-pressed="false">
+                            <div class="s1-card__icon">🏢</div>
+                            <div class="s1-card__body">
+                                <h3 class="s1-card__name">Agency</h3>
+                                <p class="s1-card__desc">Client-focused creative team</p>
+                            </div>
+                            <div class="s1-card__check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </button>
+
+                        <button class="s1-card" id="type-enterprise" data-value="enterprise" aria-pressed="false">
+                            <div class="s1-card__icon">🏛️</div>
+                            <div class="s1-card__body">
+                                <h3 class="s1-card__name">Enterprise</h3>
+                                <p class="s1-card__desc">Large organisation, complex needs</p>
+                            </div>
+                            <div class="s1-card__check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </button>
+
+                        <button class="s1-card" id="type-freelancer" data-value="freelancer" aria-pressed="false">
+                            <div class="s1-card__icon">💼</div>
+                            <div class="s1-card__body">
+                                <h3 class="s1-card__name">Freelancer</h3>
+                                <p class="s1-card__desc">Solo professional, personal workspace</p>
+                            </div>
+                            <div class="s1-card__check" aria-hidden="true">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="ob-card__foot">
+                        <button class="ob-btn ob-btn--primary ob-btn--next ripple" id="s1-next" disabled aria-disabled="true">
+                            Continue
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!--  STEP 2 — Company Information         -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="ob-panel" id="step-2" data-step="2" aria-labelledby="s2-title">
+                <div class="ob-card glass-card">
+                    <div class="ob-card__head">
+                        <div class="ob-badge">🏢 Company</div>
+                        <h2 class="ob-card__title" id="s2-title">Tell us about your company</h2>
+                        <p class="ob-card__sub">This helps us tailor your workspace to your organisation's scale.</p>
+                    </div>
+
+                    <form class="s2-form" id="s2-form" novalidate>
+                        <div class="ob-field">
+                            <input type="text" id="company-name" name="company-name" class="ob-input" placeholder=" " autocomplete="organization" required>
+                            <label for="company-name" class="ob-label">Company Name <span class="ob-required" aria-hidden="true">*</span></label>
+                            <span class="ob-error" id="err-company-name" role="alert"></span>
+                        </div>
+
+                        <div class="ob-field">
+                            <select id="industry" name="industry" class="ob-input ob-select" required>
+                                <option value="" disabled selected hidden></option>
+                                <option value="technology">Technology &amp; Software</option>
+                                <option value="marketing">Marketing &amp; Advertising</option>
+                                <option value="finance">Finance &amp; Fintech</option>
+                                <option value="healthcare">Healthcare &amp; MedTech</option>
+                                <option value="education">Education &amp; EdTech</option>
+                                <option value="ecommerce">E-commerce &amp; Retail</option>
+                                <option value="design">Design &amp; Creative</option>
+                                <option value="consulting">Consulting &amp; Services</option>
+                                <option value="manufacturing">Manufacturing &amp; Logistics</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <label for="industry" class="ob-label ob-label--select">Industry <span class="ob-required" aria-hidden="true">*</span></label>
+                            <span class="ob-error" id="err-industry" role="alert"></span>
+                        </div>
+
+                        <div class="s2-row">
+                            <div class="ob-field">
+                                <select id="team-size" name="team-size" class="ob-input ob-select" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="1">Just me</option>
+                                    <option value="2-10">2 – 10</option>
+                                    <option value="11-50">11 – 50</option>
+                                    <option value="51-200">51 – 200</option>
+                                    <option value="201-1000">201 – 1 000</option>
+                                    <option value="1000+">1 000+</option>
+                                </select>
+                                <label for="team-size" class="ob-label ob-label--select">Team Size <span class="ob-required" aria-hidden="true">*</span></label>
+                                <span class="ob-error" id="err-team-size" role="alert"></span>
+                            </div>
+
+                            <div class="ob-field">
+                                <select id="country" name="country" class="ob-input ob-select" required>
+                                    <option value="" disabled selected hidden></option>
+                                    <option value="us">United States</option>
+                                    <option value="gb">United Kingdom</option>
+                                    <option value="ca">Canada</option>
+                                    <option value="au">Australia</option>
+                                    <option value="de">Germany</option>
+                                    <option value="fr">France</option>
+                                    <option value="in">India</option>
+                                    <option value="sg">Singapore</option>
+                                    <option value="jp">Japan</option>
+                                    <option value="br">Brazil</option>
+                                    <option value="pk">Pakistan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <label for="country" class="ob-label ob-label--select">Country <span class="ob-required" aria-hidden="true">*</span></label>
+                                <span class="ob-error" id="err-country" role="alert"></span>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="ob-card__foot">
+                        <button class="ob-btn ob-btn--ghost ripple" id="s2-back">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back
+                        </button>
+                        <button class="ob-btn ob-btn--primary ripple" id="s2-next">
+                            Continue
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!--  STEP 3 — Invite Team                 -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="ob-panel" id="step-3" data-step="3" aria-labelledby="s3-title">
+                <div class="ob-card glass-card">
+                    <div class="ob-card__head">
+                        <div class="ob-badge">👥 Team</div>
+                        <h2 class="ob-card__title" id="s3-title">Invite your team</h2>
+                        <p class="ob-card__sub">Add teammates now or skip and do it later from your workspace settings.</p>
+                    </div>
+
+                    <div class="s3-invite-row">
+                        <div class="ob-field s3-email-field">
+                            <input type="email" id="invite-email" name="invite-email" class="ob-input" placeholder=" " autocomplete="off">
+                            <label for="invite-email" class="ob-label">Email address</label>
+                            <span class="ob-error" id="err-invite-email" role="alert"></span>
+                        </div>
+
+                        <div class="ob-field s3-role-field">
+                            <select id="invite-role" name="invite-role" class="ob-input ob-select">
+                                <option value="member" selected>Member</option>
+                                <option value="admin">Admin</option>
+                                <option value="viewer">Viewer</option>
+                                <option value="guest">Guest</option>
+                            </select>
+                            <label for="invite-role" class="ob-label ob-label--select">Role</label>
+                        </div>
+
+                        <button class="ob-btn ob-btn--add ripple" id="add-member-btn" aria-label="Add team member">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        </button>
+                    </div>
+
+                    <div class="s3-members" id="s3-members" aria-label="Invited members" aria-live="polite">
+                        <!-- chips injected by JS -->
+                    </div>
+
+                    <p class="s3-hint" id="s3-empty-hint">No members added yet — you can always invite later.</p>
+
+                    <div class="ob-card__foot">
+                        <button class="ob-btn ob-btn--ghost ripple" id="s3-back">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back
+                        </button>
+                        <div class="s3-foot-right">
+                            <button class="ob-btn ob-btn--text" id="s3-skip">Skip for now</button>
+                            <button class="ob-btn ob-btn--primary ripple" id="s3-next">
+                                Continue
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!--  STEP 4 — Workspace Preferences       -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="ob-panel" id="step-4" data-step="4" aria-labelledby="s4-title">
+                <div class="ob-card glass-card">
+                    <div class="ob-card__head">
+                        <div class="ob-badge">⚙️ Preferences</div>
+                        <h2 class="ob-card__title" id="s4-title">Customise your workspace</h2>
+                        <p class="ob-card__sub">Fine-tune how FlowSync looks and behaves for your team.</p>
+                    </div>
+
+                    <div class="s4-sections">
+
+                        <!-- Theme -->
+                        <div class="s4-section">
+                            <h3 class="s4-section__title">Workspace Theme</h3>
+                            <div class="s4-theme-group" role="radiogroup" aria-label="Choose theme">
+                                <label class="s4-theme-card" id="theme-light-label">
+                                    <input type="radio" name="ws-theme" value="light" id="ws-theme-light" class="visually-hidden">
+                                    <div class="s4-theme-preview s4-theme-preview--light" aria-hidden="true">
+                                        <div class="s4-theme-preview__bar"></div>
+                                        <div class="s4-theme-preview__rows">
+                                            <div class="s4-theme-preview__row"></div>
+                                            <div class="s4-theme-preview__row"></div>
+                                        </div>
+                                    </div>
+                                    <span class="s4-theme-name">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                                        Light
+                                    </span>
+                                </label>
+
+                                <label class="s4-theme-card s4-theme-card--active" id="theme-dark-label">
+                                    <input type="radio" name="ws-theme" value="dark" id="ws-theme-dark" class="visually-hidden" checked>
+                                    <div class="s4-theme-preview s4-theme-preview--dark" aria-hidden="true">
+                                        <div class="s4-theme-preview__bar"></div>
+                                        <div class="s4-theme-preview__rows">
+                                            <div class="s4-theme-preview__row"></div>
+                                            <div class="s4-theme-preview__row"></div>
+                                        </div>
+                                    </div>
+                                    <span class="s4-theme-name">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                                        Dark
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Accent Color -->
+                        <div class="s4-section">
+                            <h3 class="s4-section__title">Accent Color</h3>
+                            <div class="s4-colors" role="radiogroup" aria-label="Choose accent color">
+                                <label class="s4-color-swatch s4-color-swatch--active" style="--swatch: #2563EB;" title="Blue">
+                                    <input type="radio" name="accent" value="blue" class="visually-hidden" checked>
+                                    <svg class="s4-color-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="visually-hidden">Blue</span>
+                                </label>
+                                <label class="s4-color-swatch" style="--swatch: #7C3AED;" title="Purple">
+                                    <input type="radio" name="accent" value="purple" class="visually-hidden">
+                                    <svg class="s4-color-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="visually-hidden">Purple</span>
+                                </label>
+                                <label class="s4-color-swatch" style="--swatch: #10B981;" title="Green">
+                                    <input type="radio" name="accent" value="green" class="visually-hidden">
+                                    <svg class="s4-color-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="visually-hidden">Green</span>
+                                </label>
+                                <label class="s4-color-swatch" style="--swatch: #EC4899;" title="Pink">
+                                    <input type="radio" name="accent" value="pink" class="visually-hidden">
+                                    <svg class="s4-color-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="visually-hidden">Pink</span>
+                                </label>
+                                <label class="s4-color-swatch" style="--swatch: #EF4444;" title="Red">
+                                    <input type="radio" name="accent" value="red" class="visually-hidden">
+                                    <svg class="s4-color-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <span class="visually-hidden">Red</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="s4-two-col">
+                            <!-- Notifications -->
+                            <div class="s4-section">
+                                <h3 class="s4-section__title">Notifications</h3>
+                                <div class="s4-toggles">
+                                    <div class="s4-toggle-row">
+                                        <div class="s4-toggle-info">
+                                            <span class="s4-toggle-label">Email Digests</span>
+                                            <span class="s4-toggle-desc">Weekly summary emails</span>
+                                        </div>
+                                        <label class="ob-toggle" aria-label="Email digests">
+                                            <input type="checkbox" id="notif-email" checked>
+                                            <span class="ob-toggle__track"><span class="ob-toggle__thumb"></span></span>
+                                        </label>
+                                    </div>
+                                    <div class="s4-toggle-row">
+                                        <div class="s4-toggle-info">
+                                            <span class="s4-toggle-label">Push Alerts</span>
+                                            <span class="s4-toggle-desc">Real-time browser notifications</span>
+                                        </div>
+                                        <label class="ob-toggle" aria-label="Push alerts">
+                                            <input type="checkbox" id="notif-push">
+                                            <span class="ob-toggle__track"><span class="ob-toggle__thumb"></span></span>
+                                        </label>
+                                    </div>
+                                    <div class="s4-toggle-row">
+                                        <div class="s4-toggle-info">
+                                            <span class="s4-toggle-label">Activity Feed</span>
+                                            <span class="s4-toggle-desc">In-app activity stream</span>
+                                        </div>
+                                        <label class="ob-toggle" aria-label="Activity feed">
+                                            <input type="checkbox" id="notif-activity" checked>
+                                            <span class="ob-toggle__track"><span class="ob-toggle__thumb"></span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Language -->
+                            <div class="s4-section">
+                                <h3 class="s4-section__title">Language</h3>
+                                <div class="ob-field">
+                                    <select id="ws-language" class="ob-input ob-select">
+                                        <option value="en" selected>English (US)</option>
+                                        <option value="en-gb">English (UK)</option>
+                                        <option value="de">Deutsch</option>
+                                        <option value="fr">Français</option>
+                                        <option value="es">Español</option>
+                                        <option value="ja">日本語</option>
+                                        <option value="zh">中文</option>
+                                        <option value="ar">العربية</option>
+                                        <option value="ur">اردو</option>
+                                    </select>
+                                    <label for="ws-language" class="ob-label ob-label--select">Display Language</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Integrations -->
+                        <div class="s4-section">
+                            <h3 class="s4-section__title">Connect Integrations</h3>
+                            <div class="s4-integrations">
+                                <label class="s4-integration" for="int-slack">
+                                    <input type="checkbox" id="int-slack">
+                                    <div class="s4-integration__icon" style="background:#4A154B;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M5.042 15.165a2.528 2.528 0 01-2.52 2.523A2.528 2.528 0 010 15.165a2.527 2.527 0 012.522-2.52h2.52v2.52zm1.271 0a2.527 2.527 0 012.521-2.52 2.527 2.527 0 012.521 2.52v6.313A2.528 2.528 0 018.834 24a2.528 2.528 0 01-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 01-2.521-2.52A2.528 2.528 0 018.834 0a2.527 2.527 0 012.521 2.522v2.52H8.834zm0 1.271a2.527 2.527 0 012.521 2.521 2.527 2.527 0 01-2.521 2.521H2.522A2.528 2.528 0 010 8.834a2.528 2.528 0 012.522-2.521h6.312zm10.122 2.521a2.528 2.528 0 012.522-2.521A2.528 2.528 0 0124 8.834a2.527 2.527 0 01-2.522 2.521h-2.522V8.834zm-1.268 0a2.527 2.527 0 01-2.523 2.521 2.526 2.526 0 01-2.52-2.521V2.522A2.527 2.527 0 0115.165 0a2.528 2.528 0 012.523 2.522v6.312zm-2.523 10.122a2.528 2.528 0 012.523 2.522A2.528 2.528 0 0115.165 24a2.527 2.527 0 01-2.52-2.522v-2.522h2.52zm0-1.268a2.527 2.527 0 01-2.52-2.523 2.526 2.526 0 012.52-2.52h6.313A2.527 2.527 0 0124 15.165a2.528 2.528 0 01-2.522 2.523h-6.313z"/></svg>
+                                    </div>
+                                    <div class="s4-integration__body">
+                                        <span class="s4-integration__name">Slack</span>
+                                        <span class="s4-integration__desc">Team messaging</span>
+                                    </div>
+                                    <div class="s4-integration__check" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+
+                                <label class="s4-integration" for="int-gdrive">
+                                    <input type="checkbox" id="int-gdrive">
+                                    <div class="s4-integration__icon" style="background:#1A73E8;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M6.5 2L1 11.5l4 7L9.5 11 6.5 2zM17.5 2L14.5 11l4.5 7.5L23 11 17.5 2zM12 11L7.5 18.5h9L12 11z"/></svg>
+                                    </div>
+                                    <div class="s4-integration__body">
+                                        <span class="s4-integration__name">Google Drive</span>
+                                        <span class="s4-integration__desc">Cloud file storage</span>
+                                    </div>
+                                    <div class="s4-integration__check" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+
+                                <label class="s4-integration" for="int-github">
+                                    <input type="checkbox" id="int-github">
+                                    <div class="s4-integration__icon" style="background:#24292F;">
+                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                                    </div>
+                                    <div class="s4-integration__body">
+                                        <span class="s4-integration__name">GitHub</span>
+                                        <span class="s4-integration__desc">Code repository</span>
+                                    </div>
+                                    <div class="s4-integration__check" aria-hidden="true">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div><!-- /s4-sections -->
+
+                    <div class="ob-card__foot">
+                        <button class="ob-btn ob-btn--ghost ripple" id="s4-back">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                            Back
+                        </button>
+                        <button class="ob-btn ob-btn--primary ripple" id="s4-next">
+                            Finish Setup
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ══════════════════════════════════════ -->
+            <!--  STEP 5 — Success                     -->
+            <!-- ══════════════════════════════════════ -->
+            <section class="ob-panel" id="step-5" data-step="5" aria-labelledby="s5-title">
+                <div class="ob-card ob-card--success glass-card">
+
+                    <!-- Loading State -->
+                    <div class="s5-loading" id="s5-loading" aria-live="polite">
+                        <div class="s5-loader">
+                            <div class="s5-loader__ring"></div>
+                            <div class="s5-loader__ring s5-loader__ring--2"></div>
+                        </div>
+                        <h2 class="s5-loading__title">Setting up your workspace…</h2>
+                        <div class="s5-tasks" id="s5-tasks">
+                            <div class="s5-task" id="task-1">
+                                <div class="s5-task__icon s5-task__icon--spin">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                                </div>
+                                <span>Preparing workspace…</span>
+                            </div>
+                            <div class="s5-task s5-task--pending" id="task-2">
+                                <div class="s5-task__icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/></svg>
+                                </div>
+                                <span>Creating dashboard…</span>
+                            </div>
+                            <div class="s5-task s5-task--pending" id="task-3">
+                                <div class="s5-task__icon">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
+                                </div>
+                                <span>Syncing data…</span>
+                            </div>
+                        </div>
+                        <div class="s5-progress-bar">
+                            <div class="s5-progress-fill" id="s5-progress-fill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Success State -->
+                    <div class="s5-success" id="s5-success" aria-live="polite" hidden>
+                        <div class="s5-success__icon-wrap">
+                            <div class="s5-success__ring"></div>
+                            <div class="s5-success__icon">
+                                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                            </div>
+                        </div>
+                        <h1 class="s5-success__title" id="s5-title">Welcome to FlowSync! <span class="s5-success__emoji" aria-hidden="true">🎉</span></h1>
+                        <p class="s5-success__sub">Your workspace has been successfully created. Everything is ready — let's build something great.</p>
+                        <div class="s5-success__stats">
+                            <div class="s5-stat">
+                                <span class="s5-stat__val" id="stat-members">0</span>
+                                <span class="s5-stat__label">Members</span>
+                            </div>
+                            <div class="s5-stat">
+                                <span class="s5-stat__val">1</span>
+                                <span class="s5-stat__label">Workspace</span>
+                            </div>
+                            <div class="s5-stat">
+                                <span class="s5-stat__val">∞</span>
+                                <span class="s5-stat__label">Possibilities</span>
+                            </div>
+                        </div>
+                        <div class="s5-success__actions">
+                            <a href="dashboard.html" class="ob-btn ob-btn--primary ob-btn--lg ripple" id="open-dashboard">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                                Open Dashboard
+                            </a>
+                            <a href="index.html" class="ob-btn ob-btn--ghost ripple" id="back-to-landing">
+                                Back to Landing Page
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div><!-- /ob-viewport -->
+
+    </main><!-- /ob-shell -->
+
+    <script src="../js/onboarding.js"></script>
 </body>
 </html>
