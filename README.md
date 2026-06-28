@@ -138,49 +138,37 @@ Run using Live Server or any local development server.
 
 ## Hero Section
 
-```
 ![Hero Section Screenshot](assets/screenshots/hero-section.png)
-```
 
 ---
 
 ## Product Overview
 
-```
 ![Solution Section Screenshot](assets/screenshots/productoverview.png)
-```
 
 ---
 
 ## Features Section
 
-```
 ![Features Section Screenshot](assets/screenshots/features.png)
-```
 
 ---
 
 ## Customer Onboarding
 
-```
 ![Customer Onboarding Screenshot](assets/screenshots/onboarding1.png)
-```
 
 ---
 
 ## Dashboard
 
-```
 ![Dashboard Screenshot](assets/screenshots/dashboard.png)
-```
 
 ---
 
 ## Mobile View
 
-```
 ![Mobile View Screenshot](assets/screenshots/mobile-view.png)
-```
 
 ---
 
