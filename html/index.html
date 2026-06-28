@@ -1,21 +1,1693 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>FlowSync | SaaS Product</title>
+    <title>FlowSync | One Workspace. Every Team. Unlimited Growth.</title>
+    <meta name="description"
+        content="FlowSync is a cloud-based SaaS platform that helps businesses manage projects, collaborate with teams, automate workflows, and monitor business performance from one centralized workspace.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
 </head>
+
 <body>
 
-    <script src="js/app.js"></script>
+    <div class="nav-overlay" id="nav-overlay" aria-hidden="true"></div>
+
+    <header class="header">
+        <div class="container header-container">
+            <div class="header-left">
+                <button class="nav-toggle" id="nav-toggle-btn" aria-label="Toggle navigation" aria-expanded="false">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
+                <a href="#" class="logo">
+                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true">
+                        <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+                        <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M14 9V19" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+                        <defs>
+                            <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#2563EB" />
+                                <stop offset="1" stop-color="#7C3AED" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span class="logo-text">FlowSync</span>
+                </a>
+            </div>
+
+            <div class="desktop-nav">
+                <ul class="nav-list">
+                    <li><a href="#" class="nav-link">Home</a></li>
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                    <li><a href="#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="#cta" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="nav-actions">
+                <a href="#" class="btn btn-ghost nav-login">Login</a>
+                <a href="#" class="btn btn-primary nav-cta">Start Free</a>
+                <button class="theme-toggle" id="theme-toggle-btn" aria-label="Switch to light mode">
+                    <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <line x1="12" y1="1" x2="12" y2="3" />
+                        <line x1="12" y1="21" x2="12" y2="23" />
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                        <line x1="1" y1="12" x2="3" y2="12" />
+                        <line x1="21" y1="12" x2="23" y2="12" />
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                    </svg>
+                    <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav-menu" id="nav-menu" aria-label="Main navigation">
+        <div class="nav-drawer-header">
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true">
+                    <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#logoGrad)" />
+                    <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M14 9V19" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+                    <defs>
+                        <linearGradient id="logoGrad" x1="2" y1="2" x2="26" y2="26" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#2563EB" />
+                            <stop offset="1" stop-color="#7C3AED" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">FlowSync</span>
+            </a>
+            <button class="nav-close" id="nav-close-btn" aria-label="Close navigation menu">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                    stroke-linecap="round">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <ul class="nav-list">
+            <li><a href="#" class="nav-link">Home</a></li>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#pricing" class="nav-link">Pricing</a></li>
+            <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+            <li><a href="#faq" class="nav-link">FAQ</a></li>
+            <li><a href="#cta" class="nav-link">Contact</a></li>
+        </ul>
+
+        <div class="nav-divider"></div>
+
+        <button class="theme-toggle theme-toggle-mobile nav-theme-row" aria-label="Switch to light mode">
+            <svg class="theme-icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" />
+            </svg>
+            <svg class="theme-icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+            <span class="theme-label">Dark Mode</span>
+        </button>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-drawer-actions">
+            <a href="#" class="btn btn-ghost nav-drawer-login">Login</a>
+            <a href="#" class="btn btn-primary nav-drawer-cta">Start Free Trial</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-glow hero-glow-1"></div>
+            <div class="hero-glow hero-glow-2"></div>
+            <div class="hero-glow hero-glow-3"></div>
+            <div class="hero-grid"></div>
+
+            <div class="container hero-layout">
+                <div class="hero-content">
+                    <div class="hero-badge" aria-label="Trusted by 5000 plus growing teams worldwide">
+                        <span class="badge-emoji">🚀</span>
+                        <span>Trusted by 5,000+ growing teams worldwide</span>
+                    </div>
+
+                    <h1 class="hero-title">
+                        <span class="title-line">One Workspace.</span>
+                        <span class="title-line">Every Team.</span>
+                        <span class="title-line title-gradient">Unlimited Growth.</span>
+                    </h1>
+
+                    <p class="hero-desc">
+                        Streamline projects, automate workflows, collaborate in real time, and make smarter business
+                        decisions with a unified productivity platform.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-primary btn-lg hero-btn-primary">
+                            Start Free Trial
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <a href="#" class="btn btn-secondary btn-lg hero-btn-secondary">
+                            Book a Demo
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="hero-trust">
+                        <span class="trust-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            No credit card
+                        </span>
+                        <span class="trust-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Free 14-day trial
+                        </span>
+                        <span class="trust-item">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                            Cancel anytime
+                        </span>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="dash-wrapper">
+                        <div class="dash-glow"></div>
+
+                        <div class="dash-preview" role="img"
+                            aria-label="FlowSync dashboard preview showing revenue, users, growth statistics, and activity feed">
+                            <div class="dash-sidebar">
+                                <div class="dash-logo-icon">
+                                    <svg width="20" height="20" viewBox="0 0 28 28" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                        <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#dashLogo)" />
+                                        <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5"
+                                            stroke-linecap="round" stroke-linejoin="round" />
+                                        <defs>
+                                            <linearGradient id="dashLogo" x1="2" y1="2" x2="26" y2="26"
+                                                gradientUnits="userSpaceOnUse">
+                                                <stop stop-color="#2563EB" />
+                                                <stop offset="1" stop-color="#7C3AED" />
+                                            </linearGradient>
+                                        </defs>
+                                    </svg>
+                                </div>
+                                <nav class="dash-nav" aria-label="Dashboard navigation">
+                                    <button class="dash-nav-item active" aria-label="Dashboard">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <rect x="3" y="3" width="7" height="7" />
+                                            <rect x="14" y="3" width="7" height="7" />
+                                            <rect x="3" y="14" width="7" height="7" />
+                                            <rect x="14" y="14" width="7" height="7" />
+                                        </svg>
+                                    </button>
+                                    <button class="dash-nav-item" aria-label="Projects">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path
+                                                d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                                        </svg>
+                                    </button>
+                                    <button class="dash-nav-item" aria-label="Analytics">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <line x1="18" y1="20" x2="18" y2="10" />
+                                            <line x1="12" y1="20" x2="12" y2="4" />
+                                            <line x1="6" y1="20" x2="6" y2="14" />
+                                        </svg>
+                                    </button>
+                                    <button class="dash-nav-item" aria-label="Team">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                            <path d="M16 3.13a4 4 0 010 7.75" />
+                                        </svg>
+                                    </button>
+                                    <button class="dash-nav-item" aria-label="Settings">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                            stroke-linejoin="round">
+                                            <circle cx="12" cy="12" r="3" />
+                                            <path
+                                                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                                        </svg>
+                                    </button>
+                                </nav>
+                            </div>
+
+                            <div class="dash-main">
+                                <div class="dash-header">
+                                    <h2 class="dash-header-title">Dashboard</h2>
+                                    <div class="dash-header-right">
+                                        <button class="dash-notif-btn" aria-label="Notifications">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                                <path d="M13.73 21a2 2 0 01-3.46 0" />
+                                            </svg>
+                                            <span class="notif-dot"></span>
+                                        </button>
+                                        <div class="dash-avatar" aria-label="User avatar">JD</div>
+                                    </div>
+                                </div>
+
+                                <div class="dash-stats">
+                                    <div class="dash-stat-card stat-revenue">
+                                        <span class="stat-label">Revenue</span>
+                                        <span class="stat-value">$54,200</span>
+                                        <span class="stat-change stat-up">+12.5%</span>
+                                    </div>
+                                    <div class="dash-stat-card stat-users">
+                                        <span class="stat-label">Users</span>
+                                        <span class="stat-value">12,430</span>
+                                        <span class="stat-change stat-up">+8.2%</span>
+                                    </div>
+                                    <div class="dash-stat-card stat-growth">
+                                        <span class="stat-label">Growth</span>
+                                        <span class="stat-value">+18%</span>
+                                        <span class="stat-change">MoM</span>
+                                    </div>
+                                </div>
+
+                                <div class="dash-bottom">
+                                    <div class="dash-chart-panel">
+                                        <div class="panel-header">
+                                            <span class="panel-title">Revenue Trend</span>
+                                            <span class="panel-badge">+23.4%</span>
+                                        </div>
+                                        <div class="chart-container">
+                                            <svg viewBox="0 0 240 70" xmlns="http://www.w3.org/2000/svg" role="img"
+                                                aria-label="Line chart showing revenue growth trend">
+                                                <defs>
+                                                    <linearGradient id="chartArea" x1="0" y1="0" x2="0" y2="1">
+                                                        <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.25" />
+                                                        <stop offset="100%" stop-color="#7C3AED" stop-opacity="0" />
+                                                    </linearGradient>
+                                                </defs>
+                                                <line x1="10" y1="18" x2="230" y2="18" stroke="rgba(255,255,255,0.04)"
+                                                    stroke-width="1" />
+                                                <line x1="10" y1="35" x2="230" y2="35" stroke="rgba(255,255,255,0.04)"
+                                                    stroke-width="1" />
+                                                <line x1="10" y1="52" x2="230" y2="52" stroke="rgba(255,255,255,0.04)"
+                                                    stroke-width="1" />
+                                                <path
+                                                    d="M10 62 L35 55 L60 50 L85 42 L110 30 L135 33 L160 20 L185 24 L210 15 L230 18"
+                                                    stroke="#7C3AED" stroke-width="2" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
+                                                <path
+                                                    d="M10 62 L35 55 L60 50 L85 42 L110 30 L135 33 L160 20 L185 24 L210 15 L230 18 L230 70 L10 70 Z"
+                                                    fill="url(#chartArea)" />
+                                                <circle cx="210" cy="15" r="3.5" fill="#7C3AED" stroke="#1E293B"
+                                                    stroke-width="1.5" />
+                                            </svg>
+                                        </div>
+                                    </div>
+
+                                    <div class="dash-activity-panel">
+                                        <span class="panel-title">Recent Activity</span>
+                                        <div class="activity-list">
+                                            <div class="activity-item">
+                                                <span class="activity-dot activity-dot-blue"></span>
+                                                <div class="activity-content">
+                                                    <span class="activity-text">New team member joined</span>
+                                                    <span class="activity-time">2m ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item">
+                                                <span class="activity-dot activity-dot-green"></span>
+                                                <div class="activity-content">
+                                                    <span class="activity-text">Project milestone completed</span>
+                                                    <span class="activity-time">1h ago</span>
+                                                </div>
+                                            </div>
+                                            <div class="activity-item">
+                                                <span class="activity-dot activity-dot-cyan"></span>
+                                                <div class="activity-content">
+                                                    <span class="activity-text">Workflow automation triggered</span>
+                                                    <span class="activity-time">3h ago</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="float-card float-card-1">
+                        <div class="float-card-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#38BDF8"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <div class="float-card-info">
+                            <span class="float-card-label">Revenue</span>
+                            <span class="float-card-value">$54.2K</span>
+                        </div>
+                    </div>
+
+                    <div class="float-card float-card-2">
+                        <div class="float-card-icon">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20V10" />
+                                <path d="M18 20V4" />
+                                <path d="M6 20v-4" />
+                            </svg>
+                        </div>
+                        <div class="float-card-info">
+                            <span class="float-card-label">Active Users</span>
+                            <span class="float-card-value">12.4K</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="trusted">
+            <div class="container">
+                <div class="trusted-divider"></div>
+                <p class="trusted-label">Trusted by innovative teams at</p>
+                <div class="marquee" role="list" aria-label="Trusted companies">
+                    <div class="marquee-track">
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                            <span class="marquee-name">Google</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="11" fill="#1DB954" />
+                                <path d="M7.5 13.5c3-1.5 6-.5 9 1" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M6 11c3.5-1.5 7-.5 10 1.5" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M9 16c2-1 4-.5 5.5.5" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                    fill="none" />
+                            </svg>
+                            <span class="marquee-name">Spotify</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="4" y="4" width="7" height="2.5" rx="1.2" fill="#E01E5A" />
+                                <rect x="4" y="4" width="2.5" height="7" rx="1.2" fill="#E01E5A" />
+                                <rect x="13" y="4" width="7" height="2.5" rx="1.2" fill="#36C5F0" />
+                                <rect x="17.5" y="4" width="2.5" height="7" rx="1.2" fill="#36C5F0" />
+                                <rect x="4" y="13" width="7" height="2.5" rx="1.2" fill="#2EB67D" />
+                                <rect x="4" y="17.5" width="2.5" height="7" rx="1.2" fill="#2EB67D" />
+                                <rect x="13" y="13" width="7" height="2.5" rx="1.2" fill="#ECB22E" />
+                                <rect x="17.5" y="13" width="2.5" height="7" rx="1.2" fill="#ECB22E" />
+                            </svg>
+                            <span class="marquee-name">Slack</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="3" y="3" width="8" height="8" rx="1" fill="#F25022" />
+                                <rect x="13" y="3" width="8" height="8" rx="1" fill="#7FBA00" />
+                                <rect x="3" y="13" width="8" height="8" rx="1" fill="#00A4EF" />
+                                <rect x="13" y="13" width="8" height="8" rx="1" fill="#FFB900" />
+                            </svg>
+                            <span class="marquee-name">Microsoft</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="18" rx="4" fill="white" />
+                                <path d="M7 6v12M17 6v12" stroke="black" stroke-width="1.8" stroke-linecap="round" />
+                                <line x1="7" y1="12" x2="17" y2="12" stroke="black" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="marquee-name">Notion</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path d="M4 2L4 22L12 10L12 22L20 10L20 2L12 14L12 2Z" fill="#E50914" />
+                            </svg>
+                            <span class="marquee-name">Netflix</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path d="M12 2L2 22h5.5l2.5-6h4l2.5 6H22L12 2z" fill="#FF0000" />
+                            </svg>
+                            <span class="marquee-name">Adobe</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path
+                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.09.682-.22.682-.48v-1.71c-2.782.6-3.37-1.34-3.37-1.34-.454-1.16-1.11-1.47-1.11-1.47-.908-.62.07-.61.07-.61 1.004.07 1.53 1.03 1.53 1.03.893 1.52 2.341 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.68.48C19.138 20.16 22 16.42 22 12c0-5.523-4.477-10-10-10z"
+                                    fill="white" />
+                            </svg>
+                            <span class="marquee-name">GitHub</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path
+                                    d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"
+                                    fill="#4285F4" />
+                                <path
+                                    d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                                    fill="#34A853" />
+                                <path
+                                    d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                                    fill="#FBBC05" />
+                                <path
+                                    d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                                    fill="#EA4335" />
+                            </svg>
+                            <span class="marquee-name">Google</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <circle cx="12" cy="12" r="11" fill="#1DB954" />
+                                <path d="M7.5 13.5c3-1.5 6-.5 9 1" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M6 11c3.5-1.5 7-.5 10 1.5" stroke="white" stroke-width="1.5"
+                                    stroke-linecap="round" fill="none" />
+                                <path d="M9 16c2-1 4-.5 5.5.5" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                    fill="none" />
+                            </svg>
+                            <span class="marquee-name">Spotify</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="4" y="4" width="7" height="2.5" rx="1.2" fill="#E01E5A" />
+                                <rect x="4" y="4" width="2.5" height="7" rx="1.2" fill="#E01E5A" />
+                                <rect x="13" y="4" width="7" height="2.5" rx="1.2" fill="#36C5F0" />
+                                <rect x="17.5" y="4" width="2.5" height="7" rx="1.2" fill="#36C5F0" />
+                                <rect x="4" y="13" width="7" height="2.5" rx="1.2" fill="#2EB67D" />
+                                <rect x="4" y="17.5" width="2.5" height="7" rx="1.2" fill="#2EB67D" />
+                                <rect x="13" y="13" width="7" height="2.5" rx="1.2" fill="#ECB22E" />
+                                <rect x="17.5" y="13" width="2.5" height="7" rx="1.2" fill="#ECB22E" />
+                            </svg>
+                            <span class="marquee-name">Slack</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="3" y="3" width="8" height="8" rx="1" fill="#F25022" />
+                                <rect x="13" y="3" width="8" height="8" rx="1" fill="#7FBA00" />
+                                <rect x="3" y="13" width="8" height="8" rx="1" fill="#00A4EF" />
+                                <rect x="13" y="13" width="8" height="8" rx="1" fill="#FFB900" />
+                            </svg>
+                            <span class="marquee-name">Microsoft</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="18" rx="4" fill="white" />
+                                <path d="M7 6v12M17 6v12" stroke="black" stroke-width="1.8" stroke-linecap="round" />
+                                <line x1="7" y1="12" x2="17" y2="12" stroke="black" stroke-width="1.8"
+                                    stroke-linecap="round" />
+                            </svg>
+                            <span class="marquee-name">Notion</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path d="M4 2L4 22L12 10L12 22L20 10L20 2L12 14L12 2Z" fill="#E50914" />
+                            </svg>
+                            <span class="marquee-name">Netflix</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path d="M12 2L2 22h5.5l2.5-6h4l2.5 6H22L12 2z" fill="#FF0000" />
+                            </svg>
+                            <span class="marquee-name">Adobe</span>
+                        </div>
+                        <div class="marquee-item" role="listitem">
+                            <svg class="marquee-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                aria-hidden="true">
+                                <path
+                                    d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.09.682-.22.682-.48v-1.71c-2.782.6-3.37-1.34-3.37-1.34-.454-1.16-1.11-1.47-1.11-1.47-.908-.62.07-.61.07-.61 1.004.07 1.53 1.03 1.53 1.03.893 1.52 2.341 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02.8-.22 1.65-.33 2.5-.33.85 0 1.7.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .26.18.58.68.48C19.138 20.16 22 16.42 22 12c0-5.523-4.477-10-10-10z"
+                                    fill="white" />
+                            </svg>
+                            <span class="marquee-name">GitHub</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Why Teams Switch (Problem → Solution) ===== -->
+        <section class="problems-section" id="why-switch">
+            <div class="problems-glow problems-glow-1"></div>
+            <div class="problems-glow problems-glow-2"></div>
+
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-secondary section-badge">THE PROBLEM</span>
+                    <h2 class="section-title section-title-center">Work shouldn't feel this complicated.</h2>
+                    <p class="section-desc">Growing teams juggle multiple apps just to communicate, manage projects,
+                        assign tasks, track progress, and analyze performance. Too many disconnected tools create
+                        unnecessary complexity, slow collaboration, and reduce productivity.</p>
+                </div>
+
+                <div class="problems-grid">
+                    <div class="problem-card" data-hover="projects" tabindex="0">
+                        <div class="problem-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <rect x="2" y="3" width="20" height="18" rx="2" />
+                                <line x1="9" y1="3" x2="9" y2="21" />
+                                <line x1="2" y1="9" x2="22" y2="9" />
+                                <line x1="2" y1="15" x2="22" y2="15" />
+                            </svg>
+                        </div>
+                        <h3 class="problem-title">Scattered Work</h3>
+                        <p class="problem-desc">Projects, documents, conversations and files are spread across different
+                            applications, making teamwork slower and less organized.</p>
+                    </div>
+
+                    <div class="problem-card" data-hover="automation" tabindex="0">
+                        <div class="problem-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
+                        </div>
+                        <h3 class="problem-title">Manual Processes</h3>
+                        <p class="problem-desc">Teams waste valuable hours repeating routine work that could easily be
+                            automated through intelligent workflows.</p>
+                    </div>
+
+                    <div class="problem-card" data-hover="analytics" tabindex="0">
+                        <div class="problem-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                                <line x1="2" y1="20" x2="22" y2="20" />
+                            </svg>
+                        </div>
+                        <h3 class="problem-title">Limited Visibility</h3>
+                        <p class="problem-desc">Managers struggle to track progress, identify bottlenecks and make
+                            confident business decisions without real-time insights.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Solution ===== -->
+        <section class="solution-section" id="solution">
+            <div class="solution-glow solution-glow-1"></div>
+
+            <div class="container">
+                <div class="solution-layout">
+                    <div class="solution-visual">
+                        <div class="dash-wrapper solution-dash-wrapper" id="interactive-dash">
+                            <div class="dash-glow solution-dash-glow"></div>
+                            <div class="dash-preview solution-dash" role="img" aria-label="FlowSync unified dashboard">
+                                <div class="dash-sidebar">
+                                    <div class="dash-logo-icon">
+                                        <svg width="20" height="20" viewBox="0 0 28 28" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#solDashLogo)" />
+                                            <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <defs>
+                                                <linearGradient id="solDashLogo" x1="2" y1="2" x2="26" y2="26"
+                                                    gradientUnits="userSpaceOnUse">
+                                                    <stop stop-color="#2563EB" />
+                                                    <stop offset="1" stop-color="#7C3AED" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    </div>
+                                    <nav class="dash-nav" aria-label="Dashboard navigation">
+                                        <button class="dash-nav-item dash-nav-projects active"
+                                            aria-label="Dashboard"><svg width="18" height="18" viewBox="0 0 24 24"
+                                                fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <rect x="3" y="3" width="7" height="7" rx="1" />
+                                                <rect x="14" y="3" width="7" height="7" rx="1" />
+                                                <rect x="3" y="14" width="7" height="7" rx="1" />
+                                                <rect x="14" y="14" width="7" height="7" rx="1" />
+                                            </svg></button>
+                                        <button class="dash-nav-item dash-nav-automation" aria-label="Workflows"><svg
+                                                width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+                                            </svg></button>
+                                        <button class="dash-nav-item dash-nav-analytics" aria-label="Analytics"><svg
+                                                width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <line x1="18" y1="20" x2="18" y2="10" />
+                                                <line x1="12" y1="20" x2="12" y2="4" />
+                                                <line x1="6" y1="20" x2="6" y2="14" />
+                                            </svg></button>
+                                        <button class="dash-nav-item" aria-label="Team"><svg width="18" height="18"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                                <circle cx="9" cy="7" r="4" />
+                                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                                <path d="M16 3.13a4 4 0 010 7.75" />
+                                            </svg></button>
+                                    </nav>
+                                </div>
+                                <div class="dash-main">
+                                    <div class="dash-header">
+                                        <div class="dash-header-left">
+                                            <div class="dash-workspace">
+                                                <svg class="dash-workspace-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                                <span class="dash-workspace-name">FlowSync Hub</span>
+                                                <svg class="dash-chevron-down" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                                            </div>
+                                            <div class="dash-search">
+                                                <svg class="dash-search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                                                <input class="dash-search-input" type="text" placeholder="Search" aria-label="Search">
+                                            </div>
+                                        </div>
+                                        <h2 class="dash-header-title dash-header-default">Overview</h2>
+                                        <h2 class="dash-header-title dash-header-projects">Project Workspace</h2>
+                                        <h2 class="dash-header-title dash-header-automation">Automation Center</h2>
+                                        <h2 class="dash-header-title dash-header-analytics">Business Analytics</h2>
+                                        <div class="dash-header-right">
+                                            <button class="dash-notif-btn" aria-label="Notifications">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                                    <path d="M13.73 21a2 2 0 01-3.46 0"/>
+                                                </svg>
+                                                <span class="notif-dot"></span>
+                                                <span class="dash-notif-badge pulse">3</span>
+                                            </button>
+                                            <div class="dash-avatar-ring">
+                                                <div class="dash-avatar" aria-label="User avatar">
+                                                    JD
+                                                    <span class="dash-avatar-online"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dash-stats-container">
+                                        <div class="dash-stats dash-stats-default">
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><span class="stat-change stat-up">+3</span></div>
+                                                <span class="stat-label">Projects</span>
+                                                <span class="stat-value" data-target="24">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,14 8,12 16,15 24,8 32,10 40,5 48,7 56,3" fill="none" stroke="#2563EB" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span class="stat-change stat-up">+12%</span></div>
+                                                <span class="stat-label">Tasks</span>
+                                                <span class="stat-value" data-target="156">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,12 8,14 16,9 24,11 32,6 40,8 48,3 56,5" fill="none" stroke="#7C3AED" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="stat-change stat-up">+5%</span></div>
+                                                <span class="stat-label">Completed</span>
+                                                <span class="stat-value" data-target="87">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,16 8,10 16,12 24,7 32,9 40,3 48,5 56,2" fill="none" stroke="#10B981" stroke-width="1.5"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="dash-stats dash-stats-projects">
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg><span class="stat-change stat-up">+8</span></div>
+                                                <span class="stat-label">Active Projects</span>
+                                                <span class="stat-value" data-target="42">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,14 8,12 16,15 24,8 32,10 40,5 48,7 56,3" fill="none" stroke="#2563EB" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg><span class="stat-change stat-up">+23</span></div>
+                                                <span class="stat-label">Tasks</span>
+                                                <span class="stat-value" data-target="318">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,12 8,14 16,9 24,11 32,6 40,8 48,3 56,5" fill="none" stroke="#7C3AED" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="stat-change stat-down">2</span></div>
+                                                <span class="stat-label">Deadlines</span>
+                                                <span class="stat-value" data-target="12">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,4 8,6 16,8 24,7 32,10 40,12 48,14 56,16" fill="none" stroke="#EF4444" stroke-width="1.5"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="dash-stats dash-stats-automation">
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="stat-change stat-up">+8</span></div>
+                                                <span class="stat-label">Automations</span>
+                                                <span class="stat-value" data-target="56">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,16 8,12 16,14 24,8 32,10 40,4 48,6 56,2" fill="none" stroke="#2563EB" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg><span class="stat-change stat-up">+42</span></div>
+                                                <span class="stat-label">Hours Saved</span>
+                                                <span class="stat-value" data-target="420">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,14 8,16 16,10 24,12 32,6 40,8 48,3 56,5" fill="none" stroke="#7C3AED" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1010 10 4 4 0 01-5-5 4 4 0 01-5-5"/><path d="M8.5 8.5a5 5 0 007 7"/></svg><span class="stat-change stat-up">+156</span></div>
+                                                <span class="stat-label">AI Actions</span>
+                                                <span class="stat-value" data-target="1842">0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,12 8,10 16,14 24,6 32,8 40,3 48,5 56,1" fill="none" stroke="#10B981" stroke-width="1.5"/></svg>
+                                            </div>
+                                        </div>
+                                        <div class="dash-stats dash-stats-analytics">
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg><span class="stat-change stat-up">+18.7%</span></div>
+                                                <span class="stat-label">Revenue</span>
+                                                <span class="stat-value" data-target="84200">$0</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,16 8,14 16,13 24,10 32,8 40,5 48,4 56,2" fill="none" stroke="#10B981" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg><span class="stat-change stat-up">+5.2%</span></div>
+                                                <span class="stat-label">Growth</span>
+                                                <span class="stat-value" data-target="26">+0%</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,16 8,12 16,14 24,8 32,10 40,4 48,6 56,3" fill="none" stroke="#7C3AED" stroke-width="1.5"/></svg>
+                                            </div>
+                                            <div class="dash-stat-card">
+                                                <div class="stat-icon-row"><svg class="stat-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><span class="stat-change stat-up">+1.2%</span></div>
+                                                <span class="stat-label">Conversion</span>
+                                                <span class="stat-value" data-target="84">0%</span>
+                                                <svg class="stat-sparkline" viewBox="0 0 60 18" width="60" height="18"><polyline points="0,14 8,16 16,11 24,13 32,7 40,9 48,4 56,6" fill="none" stroke="#06B6D4" stroke-width="1.5"/></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dash-panels-container">
+                                        <div class="dash-chart-panel dash-panel-default">
+                                            <div class="panel-chart">
+                                                <div class="panel-header"><span class="panel-title">Revenue Growth</span><span class="panel-badge">+23.4%</span></div>
+                                                <div class="chart-wrapper">
+                                                    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Revenue chart" class="dash-chart-svg">
+                                                        <defs>
+                                                            <linearGradient id="defChart" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563EB" stop-opacity="0.25"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0"/></linearGradient>
+                                                            <linearGradient id="defChartGlow" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.15"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/></linearGradient>
+                                                        </defs>
+                                                        <line x1="8" y1="15" x2="192" y2="15" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="27" x2="192" y2="27" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="39" x2="192" y2="39" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="51" x2="192" y2="51" stroke="rgba(255,255,255,0.04)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <path class="chart-fill" d="M8 50 L30 44 L55 32 L80 22 L105 26 L130 18 L155 14 L180 20 L200 12 L200 60 L8 60 Z" fill="url(#defChart)"/>
+                                                        <path class="chart-fill-glow" d="M8 50 L30 44 L55 32 L80 22 L105 26 L130 18 L155 14 L180 20 L200 12 L200 60 L8 60 Z" fill="url(#defChartGlow)"/>
+                                                        <path class="chart-line" d="M8 50 L30 44 L55 32 L80 22 L105 26 L130 18 L155 14 L180 20 L200 12" stroke="#2563EB" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <circle class="chart-end-dot" cx="200" cy="12" r="3" fill="#2563EB" stroke="#1E293B" stroke-width="1.5"/>
+                                                        <text x="16" y="58" fill="rgba(255,255,255,0.25)" font-size="5" font-family="Inter,sans-serif">Jan</text>
+                                                        <text x="56" y="58" fill="rgba(255,255,255,0.25)" font-size="5" font-family="Inter,sans-serif">Feb</text>
+                                                        <text x="96" y="58" fill="rgba(255,255,255,0.25)" font-size="5" font-family="Inter,sans-serif">Mar</text>
+                                                        <text x="134" y="58" fill="rgba(255,255,255,0.25)" font-size="5" font-family="Inter,sans-serif">Apr</text>
+                                                        <text x="174" y="58" fill="rgba(255,255,255,0.25)" font-size="5" font-family="Inter,sans-serif">May</text>
+                                                    </svg>
+                                                    <div class="chart-tooltip">
+                                                        <span class="chart-tooltip-val">$24.8K</span>
+                                                        <span class="chart-tooltip-label">Revenue</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-activity">
+                                                <div class="panel-header"><span class="panel-title">Notifications</span></div>
+                                                <div class="notif-list" data-activity="default">
+                                                    <div class="notif-item">
+                                                        <div class="notif-avatar" style="background:linear-gradient(135deg,#10B981,#059669)">S</div>
+                                                        <div class="notif-body">
+                                                            <span class="notif-text">Sarah completed Marketing Campaign</span>
+                                                            <span class="notif-time">2 min ago</span>
+                                                        </div>
+                                                        <span class="notif-status-dot notif-dot-green"></span>
+                                                    </div>
+                                                    <div class="notif-item">
+                                                        <div class="notif-avatar" style="background:linear-gradient(135deg,#2563EB,#1D4ED8)">A</div>
+                                                        <div class="notif-body">
+                                                            <span class="notif-text">New Automation Created</span>
+                                                            <span class="notif-time">14 min ago</span>
+                                                        </div>
+                                                        <span class="notif-status-dot notif-dot-blue"></span>
+                                                    </div>
+                                                    <div class="notif-item">
+                                                        <div class="notif-avatar" style="background:linear-gradient(135deg,#38BDF8,#0284C7)">R</div>
+                                                        <div class="notif-body">
+                                                            <span class="notif-text">Revenue increased by 18%</span>
+                                                            <span class="notif-time">1h ago</span>
+                                                        </div>
+                                                        <span class="notif-status-dot notif-dot-cyan"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dash-chart-panel dash-panel-projects">
+                                            <div class="panel-chart">
+                                                <div class="panel-header"><span class="panel-title">Project Progress</span><span class="panel-badge">12 tasks</span></div>
+                                                <div class="chart-wrapper">
+                                                    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Project progress chart">
+                                                        <defs><linearGradient id="projChart" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2563EB" stop-opacity="0.2"/><stop offset="100%" stop-color="#2563EB" stop-opacity="0"/></linearGradient></defs>
+                                                        <line x1="8" y1="15" x2="192" y2="15" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="30" x2="192" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="45" x2="192" y2="45" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <rect x="15" y="20" width="14" height="32" rx="3" fill="#2563EB" opacity="0.7"/>
+                                                        <rect x="43" y="12" width="14" height="40" rx="3" fill="#2563EB" opacity="0.9"/>
+                                                        <rect x="71" y="26" width="14" height="26" rx="3" fill="#2563EB" opacity="0.6"/>
+                                                        <rect x="99" y="8" width="14" height="44" rx="3" fill="#2563EB"/>
+                                                        <rect x="127" y="16" width="14" height="36" rx="3" fill="#2563EB" opacity="0.8"/>
+                                                        <rect x="155" y="30" width="14" height="22" rx="3" fill="#2563EB" opacity="0.5"/>
+                                                        <text x="22" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">M</text>
+                                                        <text x="50" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">T</text>
+                                                        <text x="78" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">W</text>
+                                                        <text x="106" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">T</text>
+                                                        <text x="134" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">F</text>
+                                                        <text x="162" y="58" fill="rgba(255,255,255,0.2)" font-size="5" font-family="Inter,sans-serif">S</text>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="panel-activity">
+                                                <div class="panel-header"><span class="panel-title">Activity</span></div>
+                                                <div class="activity-timeline" data-activity="projects">
+                                                    <div class="tl-item" style="--i:0"><span class="tl-dot tl-blue"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">Sarah created Project Alpha</span><span class="tl-time">12 min ago</span></div></div>
+                                                    <div class="tl-item" style="--i:1"><span class="tl-dot tl-green"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">John completed UI Design</span><span class="tl-time">45 min ago</span></div></div>
+                                                    <div class="tl-item" style="--i:2"><span class="tl-dot tl-cyan"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">Sprint Planning started</span><span class="tl-time">2h ago</span></div></div>
+                                                    <div class="tl-item" style="--i:3"><span class="tl-dot tl-violet"></span><div class="tl-content" style="padding-bottom:0"><span class="tl-text">David uploaded Wireframes</span><span class="tl-time">4h ago</span></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dash-chart-panel dash-panel-automation">
+                                            <div class="panel-chart">
+                                                <div class="panel-header"><span class="panel-title">Workflow Activity</span><span class="panel-badge status-active">Active</span></div>
+                                                <div class="chart-wrapper">
+                                                    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Workflow automation chart">
+                                                        <defs><linearGradient id="autoChart" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7C3AED" stop-opacity="0.25"/><stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/></linearGradient></defs>
+                                                        <line x1="8" y1="15" x2="192" y2="15" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="30" x2="192" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="45" x2="192" y2="45" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <path d="M8 48 L35 40 L60 20 L85 30 L110 14 L135 10 L160 6 L185 8 L200 4" stroke="#7C3AED" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M8 48 L35 40 L60 20 L85 30 L110 14 L135 10 L160 6 L185 8 L200 4 L200 60 L8 60 Z" fill="url(#autoChart)"/>
+                                                        <circle cx="200" cy="4" r="3" fill="#7C3AED" stroke="#1E293B" stroke-width="1.5"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="panel-activity">
+                                                <div class="panel-header"><span class="panel-title">AI Assistant</span></div>
+                                                <div class="activity-timeline" data-activity="automation">
+                                                    <div class="tl-item" style="--i:0"><span class="tl-dot tl-purple"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">I can automate your workflow. Ready to help.</span><span class="tl-time">Just now</span></div></div>
+                                                    <div class="tl-item" style="--i:1"><span class="tl-dot tl-purple"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">Suggest a timeline for Q3</span><span class="tl-time">5 min ago</span></div></div>
+                                                    <div class="tl-item" style="--i:2"><span class="tl-dot tl-purple"></span><div class="tl-content" style="padding-bottom:0"><span class="tl-text">Draft ready based on current velocity.</span><span class="tl-time">32 min ago</span></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="dash-chart-panel dash-panel-analytics">
+                                            <div class="panel-chart">
+                                                <div class="panel-header"><span class="panel-title">Revenue Analytics</span><span class="panel-badge">+18.7%</span></div>
+                                                <div class="chart-wrapper">
+                                                    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Business analytics chart">
+                                                        <defs><linearGradient id="analChart" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#06B6D4" stop-opacity="0.25"/><stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/></linearGradient></defs>
+                                                        <line x1="8" y1="15" x2="192" y2="15" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="30" x2="192" y2="30" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <line x1="8" y1="45" x2="192" y2="45" stroke="rgba(255,255,255,0.03)" stroke-width="1" stroke-dasharray="2,2"/>
+                                                        <path d="M8 52 L35 46 L60 38 L85 28 L110 20 L135 12 L160 8 L185 6 L200 4" stroke="#06B6D4" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M8 52 L35 46 L60 38 L85 28 L110 20 L135 12 L160 8 L185 6 L200 4 L200 60 L8 60 Z" fill="url(#analChart)"/>
+                                                        <circle cx="200" cy="4" r="3" fill="#06B6D4" stroke="#1E293B" stroke-width="1.5"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            <div class="panel-activity">
+                                                <div class="panel-header"><span class="panel-title">Updates</span></div>
+                                                <div class="activity-timeline" data-activity="analytics">
+                                                    <div class="tl-item" style="--i:0"><span class="tl-dot tl-cyan"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">Revenue report generated</span><span class="tl-time">8 min ago</span></div></div>
+                                                    <div class="tl-item" style="--i:1"><span class="tl-dot tl-cyan"></span><div class="tl-line"></div><div class="tl-content"><span class="tl-text">Growth target exceeded by 5.2%</span><span class="tl-time">1h ago</span></div></div>
+                                                    <div class="tl-item" style="--i:2"><span class="tl-dot tl-cyan"></span><div class="tl-content" style="padding-bottom:0"><span class="tl-text">Conversion rate optimized to 8.4%</span><span class="tl-time">3h ago</span></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dash-glow-bg"></div>
+                            <div class="solution-float-card">
+                                <div class="float-card-glow"></div>
+                                <div class="float-card-icon-efficiency">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                                </div>
+                                <div class="float-card-info">
+                                    <span class="float-card-label">Efficiency</span>
+                                    <span class="float-card-value">+32%</span>
+                                    <span class="float-card-period">This Week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="solution-content">
+                        <span class="badge badge-primary section-badge">THE SOLUTION</span>
+                        <h2 class="section-title">One platform. Zero compromises.</h2>
+                        <p class="section-desc" style="max-width:100%;">FlowSync replaces 6+ tools with a single,
+                            unified workspace. No more switching between apps. No more data scattered across
+                            spreadsheets. No more guessing what your team is working on.</p>
+                        <ul class="solution-features">
+                            <li class="solution-feature-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span><strong>Unified dashboard</strong> for projects, analytics, and team
+                                    communication</span>
+                            </li>
+                            <li class="solution-feature-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span><strong>200+ integrations</strong> that connect your existing tools
+                                    seamlessly</span>
+                            </li>
+                            <li class="solution-feature-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span><strong>Real-time sync</strong> across all devices — work from anywhere,
+                                    anytime</span>
+                            </li>
+                            <li class="solution-feature-item">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                <span><strong>Enterprise-grade security</strong> — SOC 2, SSO, and end-to-end
+                                    encryption</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-primary btn-lg" style="margin-top:0.5rem;">See How It Works</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Features ===== -->
+        <section class="features-section" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-primary">Features</span>
+                    <h2 class="section-title section-title-center">Everything you need to scale</h2>
+                    <p class="section-desc">From project management to analytics, FlowSync gives your team the tools to
+                        move faster and ship smarter.</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20V10" />
+                                <path d="M18 20V4" />
+                                <path d="M6 20v-4" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Real-time Analytics</h3>
+                        <p class="feature-card-desc">Track revenue, users, and growth with live dashboards that update
+                            as your business moves.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-violet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                <path d="M16 3.13a4 4 0 010 7.75" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Team Collaboration</h3>
+                        <p class="feature-card-desc">Work together in real time with shared workspaces, threaded
+                            discussions, and instant notifications.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Workflow Automation</h3>
+                        <p class="feature-card-desc">Automate repetitive tasks with custom triggers, actions, and
+                            integrations — no code required.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                                <line x1="3" y1="9" x2="21" y2="9" />
+                                <line x1="9" y1="21" x2="9" y2="9" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Project Management</h3>
+                        <p class="feature-card-desc">Plan, track, and deliver projects with kanban boards, timelines,
+                            and milestone tracking.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-violet">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Integrations</h3>
+                        <p class="feature-card-desc">Connect with 200+ tools including Slack, GitHub, Notion, and Google
+                            Workspace out of the box.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon feature-icon-green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                        </div>
+                        <h3 class="feature-card-title">Enterprise Security</h3>
+                        <p class="feature-card-desc">SOC 2 compliant with end-to-end encryption, role-based access, and
+                            audit logs you can trust.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Statistics ===== -->
+        <section class="stats-section" id="stats">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-primary">By the Numbers</span>
+                    <h2 class="section-title section-title-center">Trusted by teams that ship</h2>
+                    <p class="section-desc">FlowSync powers productivity for thousands of companies worldwide.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="5000">0</span>
+                        <span class="stat-plus">+</span>
+                        <span class="stat-label-card">Teams on FlowSync</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="98">0</span>
+                        <span class="stat-pct">%</span>
+                        <span class="stat-label-card">Customer satisfaction</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="200">0</span>
+                        <span class="stat-plus">+</span>
+                        <span class="stat-label-card">Native integrations</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-num" data-target="99.9">0</span>
+                        <span class="stat-pct">%</span>
+                        <span class="stat-label-card">Uptime guarantee</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Pricing ===== -->
+        <section class="pricing-section" id="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-success">Pricing</span>
+                    <h2 class="section-title section-title-center">Simple, transparent pricing</h2>
+                    <p class="section-desc">Start free, upgrade when you grow. No hidden fees, no surprise charges.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <span class="pricing-name">Starter</span>
+                            <span class="pricing-desc">Best for small teams getting started</span>
+                        </div>
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">$</span>
+                            <span class="pricing-value">0</span>
+                            <span class="pricing-period">/mo</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Up to 5 team members
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                3 active projects
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Basic analytics
+                            </li>
+                            <li class="pricing-feature disabled">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                                Automation workflows
+                            </li>
+                            <li class="pricing-feature disabled">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18" />
+                                    <line x1="6" y1="6" x2="18" y2="18" />
+                                </svg>
+                                Priority support
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Get Started Free</a>
+                    </div>
+
+                    <div class="pricing-card pricing-card-featured">
+                        <span class="pricing-badge">Most Popular</span>
+                        <div class="pricing-header">
+                            <span class="pricing-name">Professional</span>
+                            <span class="pricing-desc">Best for growing teams</span>
+                        </div>
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">$</span>
+                            <span class="pricing-value">29</span>
+                            <span class="pricing-period">/mo per user</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Unlimited team members
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Unlimited projects
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Advanced analytics
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Unlimited automations
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Priority support
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Start Free Trial</a>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <span class="pricing-name">Enterprise</span>
+                            <span class="pricing-desc">Best for large organizations</span>
+                        </div>
+                        <div class="pricing-amount">
+                            <span class="pricing-currency">$</span>
+                            <span class="pricing-value">99</span>
+                            <span class="pricing-period">/mo per user</span>
+                        </div>
+                        <ul class="pricing-features">
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Everything in Professional
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Dedicated account manager
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                Custom integrations
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                SSO & advanced security
+                            </li>
+                            <li class="pricing-feature">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12" />
+                                </svg>
+                                99.99% SLA guarantee
+                            </li>
+                        </ul>
+                        <a href="#" class="btn btn-secondary">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== Testimonials ===== -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-secondary">Testimonials</span>
+                    <h2 class="section-title section-title-center">Loved by teams worldwide</h2>
+                    <p class="section-desc">Hear from the companies that use FlowSync to move faster every day.</p>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">"FlowSync transformed how our remote team collaborates. We went from
+                            50 emails a day to zero — everything is in one place."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar">SK</div>
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">Sarah Kim</span>
+                                <span class="testimonial-role">CTO, Lumora Technologies</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">"The analytics alone saved us hours every week. We can finally see
+                            our entire business performance in one dashboard."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar green">MR</div>
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">Marcus Reed</span>
+                                <span class="testimonial-role">VP Eng, DataPulse Inc.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <p class="testimonial-text">"We evaluated six platforms before choosing FlowSync. Nothing else
+                            came close in terms of automation and ease of use."</p>
+                        <div class="testimonial-author">
+                            <div class="testimonial-avatar cyan">AL</div>
+                            <div class="testimonial-info">
+                                <span class="testimonial-name">Aiko Tanaka</span>
+                                <span class="testimonial-role">PM Lead, NexGen Solutions</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== FAQ ===== -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-primary">FAQ</span>
+                    <h2 class="section-title section-title-center">Frequently asked questions</h2>
+                    <p class="section-desc">Everything you need to know about FlowSync. Can't find what you're looking
+                        for? <a href="#" class="link">Reach out to us.</a></p>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What is FlowSync and who is it for?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>FlowSync is an all-in-one productivity platform designed for teams of all sizes. It
+                                combines project management, real-time collaboration, workflow automation, and business
+                                analytics into a single workspace, replacing the need for multiple disjointed tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Is there a free plan available?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes! FlowSync offers a generous free plan that includes up to 5 team members, 3 active
+                                projects, and basic analytics. No credit card is required to get started, and the free
+                                14-day trial of Professional features lets you explore everything before committing.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I integrate FlowSync with my existing tools?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Absolutely. FlowSync offers native integrations with 200+ popular tools including Slack,
+                                GitHub, Notion, Google Workspace, Jira, and more. You can also build custom integrations
+                                using our open API and webhooks.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How does FlowSync handle data security?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Security is our top priority. FlowSync is SOC 2 Type II certified, with end-to-end
+                                encryption (AES-256), role-based access control, SSO/SAML support, and detailed audit
+                                logs. Your data is hosted on AWS with 99.99% uptime guarantee.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I cancel my subscription anytime?
+                            <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, you can cancel your subscription at any time with no penalties. If you're on a paid
+                                plan, you'll retain access to all features until the end of your current billing period.
+                                There are no long-term contracts or hidden fees.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CTA ===== -->
+        <section class="cta-section" id="cta">
+            <div class="container">
+                <div class="cta-card">
+                    <div class="cta-glow"></div>
+                    <span class="badge badge-primary">Get Started</span>
+                    <h2 class="cta-title">Ready to transform your workflow?</h2>
+                    <p class="cta-desc">Join 5,000+ teams that trust FlowSync to streamline their projects, automate
+                        their work, and grow their business.</p>
+                    <div class="cta-form">
+                        <input type="email" class="cta-input" placeholder="Enter your work email" required
+                            aria-label="Email address">
+                        <a href="#" class="btn btn-primary">Start Free Trial</a>
+                    </div>
+                    <p class="cta-note">No credit card required. Free 14-day trial.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-secondary">Book a Demo</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="footer-logo">
+                        <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <rect x="2" y="2" width="24" height="24" rx="6" fill="url(#footerLogoGrad)" />
+                            <path d="M9 14L13 10L19 16" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M14 9V19" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.4" />
+                            <defs>
+                                <linearGradient id="footerLogoGrad" x1="2" y1="2" x2="26" y2="26"
+                                    gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#2563EB" />
+                                    <stop offset="1" stop-color="#7C3AED" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <span class="footer-logo-text">FlowSync</span>
+                    </a>
+                    <p class="footer-desc">The all-in-one workspace for modern teams. Streamline projects, automate
+                        workflows, and grow without limits.</p>
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link" aria-label="Twitter">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="GitHub">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="LinkedIn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social-link" aria-label="YouTube">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.33z" />
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Features</a></li>
+                        <li><a href="#" class="footer-link">Pricing</a></li>
+                        <li><a href="#" class="footer-link">Integrations</a></li>
+                        <li><a href="#" class="footer-link">Changelog</a></li>
+                        <li><a href="#" class="footer-link">API Docs</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">About</a></li>
+                        <li><a href="#" class="footer-link">Blog</a></li>
+                        <li><a href="#" class="footer-link">Careers</a></li>
+                        <li><a href="#" class="footer-link">Press Kit</a></li>
+                        <li><a href="#" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" class="footer-link">Help Center</a></li>
+                        <li><a href="#" class="footer-link">Documentation</a></li>
+                        <li><a href="#" class="footer-link">Community</a></li>
+                        <li><a href="#" class="footer-link">Status</a></li>
+                        <li><a href="#" class="footer-link">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span class="footer-copy">&copy; 2026 FlowSync. All rights reserved.</span>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/app.js"></script>
 </body>
+
 </html>
