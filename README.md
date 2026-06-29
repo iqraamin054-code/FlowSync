@@ -219,7 +219,9 @@ Open index.html using Live Server or any local development server.
 
 Demo Video:
 
-[![Watch the Demo](assets/screenshots/FlowSync_Github_Banner.png)](assets/videos/Flowsync_Demo_Video.mp4)
+[![Watch the Demo](assets/screenshots/FlowSync_Github_Banner.png)](assets/videos/Flowsync_Demo_Video.MP4)
+
+▶️ Click the image above to watch the demo.
 
 ---
 
