@@ -6,7 +6,7 @@
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-success?style=for-the-badge)
 ![Frontend](https://img.shields.io/badge/Frontend-Project-blueviolet?style=for-the-badge)
 
-![FlowSync Banner](assets/screenshots/github-banner.png)
+![FlowSync Banner](assets/screenshots/github-banner1.png)
 
 ---
 
