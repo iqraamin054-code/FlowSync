@@ -30,32 +30,44 @@ The project includes a marketing landing page, customer onboarding flow, and an 
 
 ## 🌐 Landing Page
 
-* Premium Hero Section
-* Glassmorphism Navigation
+* Premium Glassmorphism Navigation
+* Responsive Hero Section
 * Product Overview
-* Features Section
-* Solution Showcase
+* Interactive Solution Section
+* Features & Benefits
 * Customer Testimonials
 * Pricing Plans
-* FAQ Accordion
+* Interactive Pricing Calculator
+* Frequently Asked Questions
 * Contact Section
 * Professional Footer
-* Infinite Logo Marquee
+* Infinite Trusted Companies Marquee
 * Responsive Mobile Navigation
 
 ---
 
 ## 👤 Customer Onboarding
 
-* Multi-step onboarding wizard
-* Workspace selection
-* Company information
-* Team invitation
-* Preferences setup
+* Multi-step onboarding experience
 * Progress indicator
+* Company information collection
+* Team invitation step
+* Theme preference selection
+* Language preference selection
 * Form validation
-* Success page
+* Success confirmation
 * Automatic dashboard redirection
+
+---
+
+## 🔐 Frontend Authentication
+
+* Glassmorphism Login Modal
+* User Registration
+* Login Validation
+* LocalStorage Authentication
+* Session Persistence
+* Logout Functionality
 
 ---
 
@@ -64,6 +76,7 @@ The project includes a marketing landing page, customer onboarding flow, and an 
 * Professional analytics dashboard
 * KPI cards
 * Interactive charts
+* Project Status
 * Recent activity feed
 * User profile section
 * Responsive sidebar
@@ -71,16 +84,15 @@ The project includes a marketing landing page, customer onboarding flow, and an 
 
 ---
 
-## 🎨 UI / UX
+## 🎨 UI / UX Highlights
 
-* Glassmorphism design
-* Dark / Light mode
-* Smooth animations
-* Responsive layout
-* Mobile-first design
-* Modern typography
-* Consistent spacing
-* Accessibility considerations
+* Premium Glassmorphism Design
+* Dark & Light Theme
+* Smooth Animations
+* Responsive Layout
+* Modern Typography
+* Consistent Design System
+* Accessibility Considerations
 
 ---
 
@@ -89,7 +101,7 @@ The project includes a marketing landing page, customer onboarding flow, and an 
 * HTML5
 * CSS3
 * JavaScript (ES6)
-* Local Storage
+* Local Storage API
 * CSS Grid
 * Flexbox
 
@@ -110,9 +122,9 @@ FlowSync/
 │   ├── landing.css
 │   ├── onboarding.css
 │   ├── dashboard.css
-    ├── style.css
-    ├── success.css
-    ├── hero.css
+|   ├── style.css
+|   ├── success.css
+|   ├── hero.css
 │   └── responsive.css
 │
 ├── js/
@@ -122,11 +134,68 @@ FlowSync/
 │   └── success.js
 │
 ├── assets/
-│   ├── images/
-│   └── screenshots/
+│   ├── videos/
+|   |    └── FlowSync_Demo.mp4
+|   └── screenshots/
+|       ├── landing-page.png
+│       ├── onboarding.png
+│       ├── dashboard.png
+│       ├── login-modal.png
+│       ├── productoverview.png
+│       ├── productoverview.png
+│       ├── features.png
+│       ├── FlowSync_Github_Banner.png
+│       └── mobile-view.png
 │
 └── README.md
 ```
+
+---
+
+# 📸 Screenshots
+
+## 🏠 Landing Page
+
+![Landing Page Screenshot](assets/screenshots/landing-page.png)
+
+---
+
+## 💼 Product Overview
+
+![Solution Section Screenshot](assets/screenshots/productoverview.png)
+
+---
+
+## ⭐ Features
+
+![Features Section Screenshot](assets/screenshots/features.png)
+
+---
+
+## 👤 Customer Onboarding
+
+![Customer Onboarding Screenshot](assets/screenshots/onboarding.png)
+
+---
+
+## 📊 Dashboard
+
+![Dashboard Screenshot](assets/screenshots/dashboard.png)
+
+---
+
+## 🔐 Login Modal
+
+![login modal Screenshot](assets/screenshots/login-modal.png)
+
+---
+
+<div align="center">
+
+## 📱 Mobile View
+![Mobile View Screenshot](assets/screenshots/mobile-view.png)
+
+</div>
 
 ---
 
@@ -138,50 +207,11 @@ Clone the repository
 git clone https://github.com/iqraamin054-code/FlowSync.git
 ```
 
-Open the project folder.
+Navigate to the project folder
 
-Run using Live Server or any local development server.
+cd FlowSync
 
----
-
-# 📸 Screenshots
-
-## Hero Section
-
-![Hero Section Screenshot](assets/screenshots/hero-section.png)
-
----
-
-## Product Overview
-
-![Solution Section Screenshot](assets/screenshots/productoverview.png)
-
----
-
-## Features Section
-
-![Features Section Screenshot](assets/screenshots/features.png)
-
----
-
-## Customer Onboarding
-
-![Customer Onboarding Screenshot](assets/screenshots/onboarding1.png)
-
----
-
-## Dashboard
-
-![Dashboard Screenshot](assets/screenshots/dashboard.png)
-
----
-
-<div align="center">
-
-## Mobile View
-![Mobile View Screenshot](assets/screenshots/mobile-view.png)
-
-</div>
+Open index.html using Live Server or any local development server.
 
 ---
 
@@ -189,7 +219,10 @@ Run using Live Server or any local development server.
 
 Demo Video:
 
-(Add your video link here)
+<video width="100%" controls>
+  <source src="assets/videos/Flowsync_Demo_Video.Mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 
 ---
@@ -206,4 +239,8 @@ https://github.com/iqraamin054-code/FlowSync.git
 LinkedIn:
 www.linkedin.com/in/iqraamin-dev
 
+---
 
+## 📄 License
+
+This project was developed for educational and internship evaluation purposes.
