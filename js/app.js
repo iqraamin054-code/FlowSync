@@ -348,4 +348,156 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ────────────────────────────────────────────────────────────
+    // PRICING CALCULATOR
+    // ────────────────────────────────────────────────────────────
+
+    const calc = {
+        el: {
+            slider: document.getElementById('team-size'),
+            valueDisplay: document.getElementById('team-size-value'),
+            radios: document.querySelectorAll('input[name="billing"]'),
+            planBtns: document.querySelectorAll('.calc-plan-btn'),
+            planBadge: document.getElementById('calc-plan-badge'),
+            billingLabel: document.getElementById('calc-billing-label'),
+            billingDisplay: document.getElementById('calc-billing-display'),
+            monthlyPrice: document.getElementById('calc-monthly-price'),
+            periodLabel: document.getElementById('calc-period-label'),
+            discountRow: document.getElementById('calc-discount-row'),
+            discountAmount: document.getElementById('calc-discount-amount'),
+            savingsRow: document.getElementById('calc-savings-row'),
+            savings: document.getElementById('calc-savings'),
+            estimatedMonthly: document.getElementById('calc-estimated-monthly'),
+            estimatedYearly: document.getElementById('calc-estimated-yearly'),
+            members: document.getElementById('calc-members'),
+            cta: document.getElementById('calc-cta')
+        },
+        state: {
+            teamSize: 1,
+            billing: 'monthly',
+            plan: 'starter'
+        },
+        prices: { starter: 12, professional: 24, enterprise: 39 }
+    };
+
+    if (!calc.el.slider) return;
+
+    function animateValue(el, target, prefix, suffix, duration) {
+        if (!el) return;
+        const current = parseFloat(el.textContent.replace(/[$,]/g, '')) || 0;
+        if (current === target) return;
+        el.classList.add('updating');
+        const startTime = performance.now();
+        const diff = target - current;
+
+        function tick(now) {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            const val = current + diff * eased;
+            el.textContent = prefix + val.toFixed(2) + suffix;
+            if (progress < 1) requestAnimationFrame(tick);
+            else el.classList.remove('updating');
+        }
+
+        requestAnimationFrame(tick);
+    }
+
+    function formatCurrency(val) {
+        return '$' + val.toFixed(2);
+    }
+
+    function updateCalculator() {
+        const { teamSize, billing, plan } = calc.state;
+        const pricePerUser = calc.prices[plan];
+        const monthlyRaw = pricePerUser * teamSize;
+        const isYearly = billing === 'yearly';
+        const discount = isYearly ? monthlyRaw * 12 * 0.2 : 0;
+        const yearlyRaw = monthlyRaw * 12;
+        const yearlyAfterDiscount = yearlyRaw - discount;
+        const monthlyEffective = isYearly ? yearlyAfterDiscount / 12 : monthlyRaw;
+
+        // Animate displayed values
+        animateValue(calc.el.monthlyPrice, monthlyEffective, '', '', 400);
+        animateValue(calc.el.estimatedMonthly, monthlyEffective, '$', '', 400);
+        animateValue(calc.el.estimatedYearly, yearlyAfterDiscount, '$', '', 400);
+
+        // Static updates
+        if (calc.el.members) calc.el.members.textContent = teamSize;
+        if (calc.el.planBadge) calc.el.planBadge.textContent = plan.charAt(0).toUpperCase() + plan.slice(1);
+        if (calc.el.periodLabel) calc.el.periodLabel.textContent = isYearly ? '/mo (billed yearly)' : '/mo';
+        if (calc.el.billingLabel) calc.el.billingLabel.textContent = isYearly ? 'Yearly' : 'Monthly';
+        if (calc.el.billingDisplay) calc.el.billingDisplay.textContent = isYearly ? 'Yearly' : 'Monthly';
+
+        // Discount & Savings rows
+        if (isYearly) {
+            if (calc.el.discountRow) calc.el.discountRow.style.display = 'flex';
+            if (calc.el.discountAmount) calc.el.discountAmount.textContent = '-' + formatCurrency(discount);
+            if (calc.el.savingsRow) calc.el.savingsRow.style.display = 'flex';
+            if (calc.el.savings) calc.el.savings.textContent = formatCurrency(discount) + '/year';
+        } else {
+            if (calc.el.discountRow) calc.el.discountRow.style.display = 'none';
+            if (calc.el.savingsRow) calc.el.savingsRow.style.display = 'none';
+        }
+
+        // Pulse CTA
+        if (calc.el.cta) {
+            calc.el.cta.classList.remove('pulse');
+            void calc.el.cta.offsetWidth;
+            calc.el.cta.classList.add('pulse');
+        }
+    }
+
+    // Slider
+    calc.el.slider.addEventListener('input', () => {
+        calc.state.teamSize = parseInt(calc.el.slider.value, 10);
+        if (calc.el.valueDisplay) calc.el.valueDisplay.textContent = calc.state.teamSize;
+        calc.el.slider.setAttribute('aria-valuenow', calc.state.teamSize);
+        updateCalculator();
+    });
+
+    // Billing radios
+    calc.el.radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            if (radio.checked) {
+                calc.state.billing = radio.value;
+                updateCalculator();
+            }
+        });
+    });
+
+    // Plan buttons
+    calc.el.planBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            calc.el.planBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-checked', 'false');
+                b.setAttribute('tabindex', '-1');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-checked', 'true');
+            btn.setAttribute('tabindex', '0');
+            btn.focus();
+            calc.state.plan = btn.getAttribute('data-plan');
+            updateCalculator();
+        });
+
+        btn.addEventListener('keydown', (e) => {
+            const btns = Array.from(calc.el.planBtns);
+            const idx = btns.indexOf(btn);
+            let nextIdx = -1;
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextIdx = (idx + 1) % btns.length;
+            else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') nextIdx = (idx - 1 + btns.length) % btns.length;
+            if (nextIdx >= 0) {
+                e.preventDefault();
+                btns[nextIdx].click();
+            }
+        });
+    });
+
+    // Initialize
+    calc.el.slider.value = 1;
+    calc.el.valueDisplay.textContent = '1';
+    updateCalculator();
 });

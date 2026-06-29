@@ -338,7 +338,8 @@
     .features-grid,
     .pricing-grid,
     .testimonials-grid,
-    .problems-grid {
+    .problems-grid,
+    .calculator-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
@@ -433,6 +434,15 @@
 
     .pricing-card-featured:hover {
         transform: translateY(-4px);
+    }
+
+    .calculator-result {
+        position: static;
+    }
+
+    .calc-pricing-ref {
+        flex-direction: column;
+        gap: 0.4rem;
     }
 
     .section-title {

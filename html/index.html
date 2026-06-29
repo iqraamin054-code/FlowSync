@@ -1349,6 +1349,137 @@
             </div>
         </section>
 
+        <!-- ===== Pricing Calculator ===== -->
+        <section class="calculator-section" id="calculator">
+            <div class="container">
+                <div class="section-header">
+                    <span class="badge badge-secondary">Calculator</span>
+                    <h2 class="section-title section-title-center">Estimate Your FlowSync Cost</h2>
+                    <p class="section-desc">See how much your team would pay before starting your free trial.</p>
+                </div>
+
+                <div class="calculator-grid">
+                    <!-- LEFT: Interactive Controls -->
+                    <div class="calculator-controls glass-card" role="form" aria-label="Pricing calculator">
+                        <!-- Team Size -->
+                        <div class="calc-field">
+                            <label class="calc-label" for="team-size">
+                                Team Size
+                                <span class="calc-value-display" id="team-size-value">1</span>
+                            </label>
+                            <div class="calc-slider-wrap">
+                                <span class="calc-slider-bound">1</span>
+                                <input type="range" id="team-size" class="calc-slider" min="1" max="100" value="1"
+                                    aria-valuemin="1" aria-valuemax="100" aria-valuenow="1"
+                                    aria-label="Select number of team members">
+                                <span class="calc-slider-bound">100</span>
+                            </div>
+                        </div>
+
+                        <!-- Billing Cycle -->
+                        <fieldset class="calc-field">
+                            <legend class="calc-label">Billing Cycle</legend>
+                            <div class="calc-radios">
+                                <label class="calc-radio">
+                                    <input type="radio" name="billing" value="monthly" checked>
+                                    <span class="calc-radio-indicator"></span>
+                                    <span class="calc-radio-text">Monthly</span>
+                                </label>
+                                <label class="calc-radio">
+                                    <input type="radio" name="billing" value="yearly">
+                                    <span class="calc-radio-indicator"></span>
+                                    <span class="calc-radio-text">Yearly</span>
+                                    <span class="calc-discount-badge">Save 20%</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <!-- Plan -->
+                        <fieldset class="calc-field">
+                            <legend class="calc-label">Plan</legend>
+                            <div class="calc-plan-options" role="radiogroup" aria-label="Select a plan">
+                                <button class="calc-plan-btn active" data-plan="starter" role="radio" aria-checked="true" tabindex="0">Starter</button>
+                                <button class="calc-plan-btn" data-plan="professional" role="radio" aria-checked="false" tabindex="-1">Professional</button>
+                                <button class="calc-plan-btn" data-plan="enterprise" role="radio" aria-checked="false" tabindex="-1">Enterprise</button>
+                            </div>
+                        </fieldset>
+
+                        <div class="calc-pricing-ref">
+                            <span>Starter <strong>$12</strong>/user/mo</span>
+                            <span>Professional <strong>$24</strong>/user/mo</span>
+                            <span>Enterprise <strong>$39</strong>/user/mo</span>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Result Card -->
+                    <div class="calculator-result glass-card" aria-label="Pricing estimate">
+                        <div class="calc-result-header">
+                            <div class="calc-result-plan">
+                                <span class="calc-result-badge" id="calc-plan-badge">Starter</span>
+                                <span class="calc-result-sub" id="calc-billing-label">Monthly</span>
+                            </div>
+                            <div class="calc-result-amount">
+                                <span class="calc-result-currency">$</span>
+                                <span class="calc-result-price" id="calc-monthly-price">12</span>
+                                <span class="calc-result-period" id="calc-period-label">/mo</span>
+                            </div>
+                        </div>
+
+                        <div class="calc-result-details">
+                            <div class="calc-detail-row">
+                                <span class="calc-detail-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                                    Team Members
+                                </span>
+                                <span class="calc-detail-value" id="calc-members">1</span>
+                            </div>
+                            <div class="calc-detail-row">
+                                <span class="calc-detail-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                    Billing Cycle
+                                </span>
+                                <span class="calc-detail-value" id="calc-billing-display">Monthly</span>
+                            </div>
+                            <div class="calc-detail-row calc-detail-discount" id="calc-discount-row" style="display: none;">
+                                <span class="calc-detail-label calc-detail-label-save">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                    Yearly Discount (20%)
+                                </span>
+                                <span class="calc-detail-value calc-detail-value-green" id="calc-discount-amount">$0.00</span>
+                            </div>
+                            <div class="calc-detail-divider"></div>
+                            <div class="calc-detail-row calc-detail-total">
+                                <span class="calc-detail-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                    Estimated Monthly Cost
+                                </span>
+                                <span class="calc-detail-value calc-detail-value-lg" id="calc-estimated-monthly">$12.00</span>
+                            </div>
+                            <div class="calc-detail-row">
+                                <span class="calc-detail-label">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                                    Estimated Yearly Cost
+                                </span>
+                                <span class="calc-detail-value" id="calc-estimated-yearly">$144.00</span>
+                            </div>
+                            <div class="calc-detail-row calc-detail-savings" id="calc-savings-row" style="display: none;">
+                                <span class="calc-detail-label calc-detail-label-save">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                                    Savings
+                                </span>
+                                <span class="calc-detail-value calc-detail-value-green" id="calc-savings">$0.00/year</span>
+                            </div>
+                        </div>
+
+                        <a href="onboarding.html" class="btn btn-primary calc-cta" id="calc-cta">
+                            Start Free Trial
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- ===== Testimonials ===== -->
         <section class="testimonials-section" id="testimonials">
             <div class="container">
