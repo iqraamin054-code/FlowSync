@@ -952,4 +952,38 @@ document.addEventListener('DOMContentLoaded', () => {
             strokePath.style.animation = `chartLineDraw 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + i * 0.1}s forwards`;
         }
     });
+
+    /* ── Cursor Glow ── */
+    (() => {
+        const glow = document.getElementById('cursor-glow');
+        if (!glow || matchMedia('(hover: none) and (pointer: coarse)').matches) return;
+        let raf = null;
+        const onMove = (e) => {
+            cancelAnimationFrame(raf);
+            raf = requestAnimationFrame(() => {
+                glow.style.transform = `translate(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%))`;
+            });
+        };
+        document.addEventListener('mousemove', onMove, { passive: true });
+    })();
+
+    /* ── Back to Top ── */
+    (() => {
+        const btn = document.getElementById('back-to-top');
+        if (!btn) return;
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    btn.classList.toggle('is-visible', window.scrollY > 400);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    })();
 });

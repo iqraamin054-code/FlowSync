@@ -5250,3 +5250,90 @@ html {
         font-size: 15px;
     }
 }
+
+/* ── Cursor Glow ── */
+.cursor-glow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    height: 360px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    will-change: transform;
+    transition: opacity 0.3s;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .cursor-glow {
+        display: none !important;
+    }
+}
+
+/* ── Back to Top ── */
+.back-to-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(18, 25, 45, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: #4F7CFF;
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.2s, color 0.2s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.back-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: rgba(79, 124, 255, 0.2);
+    color: #fff;
+    border-color: rgba(79, 124, 255, 0.5);
+}
+
+.back-to-top:active {
+    transform: translateY(0) scale(0.92);
+}
+
+[data-theme="light"] .back-to-top {
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #4F7CFF;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .back-to-top:hover {
+    background: rgba(79, 124, 255, 0.12);
+    color: #2563EB;
+    border-color: rgba(79, 124, 255, 0.35);
+}
+
+@media (max-width: 480px) {
+    .back-to-top {
+        bottom: 20px;
+        right: 20px;
+        width: 44px;
+        height: 44px;
+    }
+}
