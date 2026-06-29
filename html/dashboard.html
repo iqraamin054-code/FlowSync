@@ -74,72 +74,70 @@
                     <span class="alert-dot"></span>
                 </div>
 
-                <!-- Dropdown Popover Menu (Hidden by default, matches user request screenshot) -->
-                <div class="profile-dropdown glass-card" id="profile-dropdown" aria-label="User menu">
-                    <div class="profile-dropdown-header">
-                        <div class="profile-avatar" id="avatar-dropdown">AR</div>
-                        <div class="profile-dropdown-info">
-                            <span class="profile-dropdown-name" id="username-dropdown">Alex R.</span>
-                            <span class="profile-dropdown-sub">Free</span>
+                <!-- Premium Profile Dropdown -->
+                <div class="pd" id="profile-dropdown" aria-label="User menu" role="menu" hidden>
+                    <!-- HEADER -->
+                    <div class="pd-header">
+                        <div class="pd-avatar-wrap">
+                            <div class="pd-avatar" id="pd-avatar">AR</div>
+                            <span class="pd-dot" aria-label="Online"></span>
                         </div>
-                        <svg class="chevron-right" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
+                        <div class="pd-info">
+                            <span class="pd-name" id="pd-name">Alex R.</span>
+                            <span class="pd-email" id="pd-email">alex@example.com</span>
+                            <span class="pd-status">Online</span>
+                        </div>
                     </div>
-                    <div class="dropdown-divider"></div>
-                    <ul class="dropdown-menu-list">
-                        <li class="dropdown-menu-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-                            </svg>
-                            <span>Try Plus free</span>
-                        </li>
-                        <li class="dropdown-menu-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <polyline points="12 6 12 12 16 14"></polyline>
-                            </svg>
-                            <span>Personalization</span>
-                        </li>
-                        <li class="dropdown-menu-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="12" cy="7" r="4"></circle>
-                            </svg>
+                    <div class="pd-divider"></div>
+
+                    <!-- BODY -->
+                    <div class="pd-body">
+                        <button class="pd-item" data-action="profile" role="menuitem" tabindex="-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                             <span>Profile</span>
-                        </li>
-                        <li class="dropdown-menu-item">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <circle cx="12" cy="12" r="3"></circle>
-                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                            </svg>
-                            <span>Settings</span>
-                        </li>
-                    </ul>
-                    <div class="dropdown-divider"></div>
-                    <ul class="dropdown-menu-list">
-                        <li class="dropdown-menu-item" style="justify-content: space-between; display: flex; width: 100%;">
-                            <div style="display: flex; align-items: center; gap: 0.65rem;">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <circle cx="12" cy="12" r="10"></circle>
-                                    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                                </svg>
-                                <span>Help</span>
+                        </button>
+                        <button class="pd-item pd-item--between" data-action="appearance" role="menuitem" tabindex="-1">
+                            <div class="pd-item-left">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                <span>Appearance</span>
                             </div>
-                            <svg class="chevron-right" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </li>
-                        <li class="dropdown-menu-item dropdown-logout-btn" id="dropdown-logout">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                <polyline points="16 17 21 12 16 7"></polyline>
-                                <line x1="21" y1="12" x2="9" y2="12"></line>
-                            </svg>
-                            <span>Log out</span>
-                        </li>
-                    </ul>
+                            <span class="pd-hint" id="pd-hint-theme">Dark</span>
+                        </button>
+                        <button class="pd-item pd-item--between" data-action="language" role="menuitem" tabindex="-1">
+                            <div class="pd-item-left">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                                <span>Language</span>
+                            </div>
+                            <span class="pd-hint" id="pd-hint-lang">English</span>
+                        </button>
+                        <div class="pd-item pd-item--between" role="menuitem">
+                            <div class="pd-item-left">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                <span>Notifications</span>
+                            </div>
+                            <label class="pd-toggle" aria-label="Toggle notifications">
+                                <input type="checkbox" id="pd-notif-toggle" checked>
+                                <span class="pd-toggle-track"></span>
+                            </label>
+                        </div>
+                        <button class="pd-item" data-action="settings" role="menuitem" tabindex="-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="2.18"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                            <span>Settings</span>
+                        </button>
+                        <button class="pd-item" data-action="help" role="menuitem" tabindex="-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            <span>Help Center</span>
+                        </button>
+                    </div>
+                    <div class="pd-divider"></div>
+
+                    <!-- FOOTER -->
+                    <div class="pd-footer">
+                        <button class="pd-item pd-item--danger" id="pd-logout-btn" role="menuitem" tabindex="-1">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                            <span>Logout</span>
+                        </button>
+                    </div>
                 </div>
             </div>
 

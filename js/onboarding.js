@@ -526,6 +526,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Save onboarding choices (username, company name, accent color, language, team members) to localStorage
                 localStorage.setItem('flowsync-team-members', onboardingState.teamMembers.length + 1);
                 localStorage.setItem('flowsync-username', onboardingState.fullName);
+                localStorage.setItem('flowsync-email', onboardingState.workEmail);
                 localStorage.setItem('flowsync-company', onboardingState.companyName);
                 localStorage.setItem('flowsync-accent', onboardingState.accentColor);
                 localStorage.setItem('flowsync-language', onboardingState.language);

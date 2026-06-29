@@ -97,10 +97,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (avatarLower) avatarLower.textContent = initials;
 
         // Dropdown popover header profile info
-        const usernameDropdown = document.getElementById('username-dropdown');
-        const avatarDropdown = document.getElementById('avatar-dropdown');
-        if (usernameDropdown) usernameDropdown.textContent = preferences.username;
-        if (avatarDropdown) avatarDropdown.textContent = initials;
+        const pdName = document.getElementById('pd-name');
+        const pdAvatar = document.getElementById('pd-avatar');
+        if (pdName) pdName.textContent = preferences.username;
+        if (pdAvatar) pdAvatar.textContent = initials;
 
         // Company
         if (dashboardHeading) {
@@ -503,42 +503,312 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ────────────────────────────────────────────────────────────
-    // 5d. UPPER PROFILE DROPDOWN POPMENU & LOGOUT
     // ────────────────────────────────────────────────────────────
+    // 5d. PREMIUM PROFILE DROPDOWN
+    // ────────────────────────────────────────────────────────────
+
     const profileUpper = document.getElementById('sidebar-profile-upper');
-    const profileDropdown = document.getElementById('profile-dropdown');
-    const dropdownLogout = document.getElementById('dropdown-logout');
+    const pd = document.getElementById('profile-dropdown');
+    let pdOpen = false;
 
-    if (profileUpper && profileDropdown) {
-        profileUpper.addEventListener('click', (e) => {
-            // The option does not show when clicking the notification/alert icon
-            if (e.target.closest('.profile-alert-icon')) {
-                return;
-            }
-            e.stopPropagation();
-            profileDropdown.classList.toggle('is-active');
-        });
+    // User data from localStorage
+    const userData = {
+        name: localStorage.getItem('flowsync-username') || 'Alex R.',
+        email: localStorage.getItem('flowsync-email') || 'alex@example.com',
+        company: localStorage.getItem('flowsync-company') || 'Synergy Analytics',
+        industry: localStorage.getItem('flowsync-industry') || 'Technology',
+        teamSize: localStorage.getItem('flowsync-team-members') || '5',
+        role: localStorage.getItem('flowsync-role') || 'Team Lead',
+        theme: localStorage.getItem('flowsync-theme') || '',
+        language: localStorage.getItem('flowsync-language') || 'en',
+        accent: localStorage.getItem('flowsync-accent') || 'blue',
+        notifEnabled: localStorage.getItem('flowsync-notif') !== 'false'
+    };
 
-        // Prevent click events inside the dropdown from propagating up to profileUpper,
-        // which would otherwise close it immediately.
-        profileDropdown.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
+    const langNames = {
+        en: 'English', 'en-gb': 'English (UK)', de: 'Deutsch', fr: 'Français',
+        es: 'Español', ja: '日本語', zh: '中文', ar: 'العربية', ur: 'اردو'
+    };
+    const langMap = { English: 'en', Urdu: 'ur', French: 'fr', Spanish: 'es' };
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', () => {
-            profileDropdown.classList.remove('is-active');
+    function getInitials(name) {
+        const parts = name.trim().split(/\s+/);
+        if (parts.length === 0) return 'FS';
+        if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+        return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+    }
+
+    function populateDropdown() {
+        const avatars = document.querySelectorAll('#pd-avatar, #avatar-upper, #avatar-lower');
+        const initials = getInitials(userData.name);
+        avatars.forEach(el => { if (el) el.textContent = initials; });
+        const nameEls = document.querySelectorAll('#pd-name, #username-upper, #username-lower');
+        nameEls.forEach(el => { if (el) el.textContent = userData.name; });
+        const emailEl = document.getElementById('pd-email');
+        if (emailEl) emailEl.textContent = userData.email;
+        const themeHint = document.getElementById('pd-hint-theme');
+        if (themeHint) themeHint.textContent = userData.theme === 'light' ? 'Light' : 'Dark';
+        const langHint = document.getElementById('pd-hint-lang');
+        if (langHint) langHint.textContent = langNames[userData.language] || 'English';
+        const notifToggle = document.getElementById('pd-notif-toggle');
+        if (notifToggle) notifToggle.checked = userData.notifEnabled;
+    }
+
+    // Toggle dropdown
+    function togglePD(e) {
+        if (e && e.target.closest('.profile-alert-icon')) return;
+        if (e) e.stopPropagation();
+        pdOpen = !pdOpen;
+        pd.classList.toggle('is-open', pdOpen);
+        pd.removeAttribute('hidden');
+        if (pdOpen) {
+            pd.querySelectorAll('[tabindex="-1"]').forEach(el => el.setAttribute('tabindex', '0'));
+            const firstItem = pd.querySelector('[data-action]');
+            if (firstItem) setTimeout(() => firstItem.focus(), 100);
+            populateDropdown();
+        } else {
+            pd.querySelectorAll('[tabindex="0"]').forEach(el => el.setAttribute('tabindex', '-1'));
+        }
+    }
+
+    function closePD() {
+        if (!pdOpen) return;
+        pdOpen = false;
+        pd.classList.remove('is-open');
+        pd.querySelectorAll('[tabindex="0"]').forEach(el => el.setAttribute('tabindex', '-1'));
+    }
+
+    if (profileUpper && pd) {
+        profileUpper.addEventListener('click', togglePD);
+        pd.addEventListener('click', (e) => e.stopPropagation());
+        document.addEventListener('click', closePD);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && pdOpen) closePD(); });
+    }
+
+    // ── Menu item actions ──
+    pd.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-action]');
+        if (!btn) return;
+        const action = btn.getAttribute('data-action');
+        if (action === 'profile') showProfileModal();
+        else if (action === 'appearance') showAppearanceModal();
+        else if (action === 'language') showLanguageModal();
+        else if (action === 'settings') { closePD(); window.location.href = '#'; }
+        else if (action === 'help') showHelpModal();
+    });
+
+    // Notifications toggle
+    const notifToggle = document.getElementById('pd-notif-toggle');
+    if (notifToggle) {
+        notifToggle.addEventListener('change', () => {
+            userData.notifEnabled = notifToggle.checked;
+            localStorage.setItem('flowsync-notif', notifToggle.checked);
         });
     }
 
-    if (dropdownLogout) {
-        dropdownLogout.addEventListener('click', (e) => {
-            e.preventDefault();
+    // ── Helpers ──
+    function createOverlay() {
+        const ov = document.createElement('div');
+        ov.className = 'pd-overlay';
+        document.body.appendChild(ov);
+        return ov;
+    }
+
+    function openOverlay(overlay) {
+        overlay.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeOverlay(overlay) {
+        overlay.classList.remove('is-open');
+        document.body.style.overflow = '';
+        setTimeout(() => { if (overlay.parentNode) overlay.remove(); }, 300);
+    }
+
+    function closeOnEscape(overlay, e) {
+        if (e.key === 'Escape') closeOverlay(overlay);
+    }
+
+    // ── Profile Modal ──
+    function showProfileModal() {
+        closePD();
+        const ov = createOverlay();
+        ov.innerHTML = `
+            <div class="pd-modal" role="dialog" aria-label="Profile">
+                <div class="pd-modal-header">
+                    <span class="pd-modal-title">Profile</span>
+                    <button class="pd-modal-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                </div>
+                <div class="pd-field"><span class="pd-field-label">Full Name</span><span class="pd-field-value">${userData.name}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Email</span><span class="pd-field-value">${userData.email}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Company</span><span class="pd-field-value">${userData.company}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Industry</span><span class="pd-field-value">${userData.industry}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Team Size</span><span class="pd-field-value">${userData.teamSize} members</span></div>
+                <div class="pd-field"><span class="pd-field-label">Role</span><span class="pd-field-value">${userData.role}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Theme</span><span class="pd-field-value">${userData.theme === 'light' ? 'Light' : 'Dark'}</span></div>
+                <div class="pd-field"><span class="pd-field-label">Language</span><span class="pd-field-value">${langNames[userData.language] || 'English'}</span></div>
+            </div>`;
+        ov.addEventListener('click', (e) => { if (e.target === ov) closeOverlay(ov); });
+        ov.querySelector('.pd-modal-close').addEventListener('click', () => closeOverlay(ov));
+        document.addEventListener('keydown', (e) => closeOnEscape(ov, e), { once: true });
+        openOverlay(ov);
+    }
+
+    // ── Appearance Modal ──
+    function showAppearanceModal() {
+        closePD();
+        const ov = createOverlay();
+        const currentTheme = userData.theme === 'light' ? 'light' : 'dark';
+        ov.innerHTML = `
+            <div class="pd-modal" role="dialog" aria-label="Appearance">
+                <div class="pd-modal-header">
+                    <span class="pd-modal-title">Appearance</span>
+                    <button class="pd-modal-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                </div>
+                <div class="pd-theme-options">
+                    <label class="pd-theme-opt${currentTheme === 'light' ? ' is-active' : ''}" data-theme-value="light">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <span>Light</span>
+                        <span class="pd-theme-opt-indicator"></span>
+                    </label>
+                    <label class="pd-theme-opt${currentTheme === 'dark' ? ' is-active' : ''}" data-theme-value="dark">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        <span>Dark</span>
+                        <span class="pd-theme-opt-indicator"></span>
+                    </label>
+                    <label class="pd-theme-opt" data-theme-value="system">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                        <span>System</span>
+                        <span class="pd-theme-opt-indicator"></span>
+                    </label>
+                </div>
+            </div>`;
+        ov.addEventListener('click', (e) => { if (e.target === ov) closeOverlay(ov); });
+        ov.querySelector('.pd-modal-close').addEventListener('click', () => closeOverlay(ov));
+        document.addEventListener('keydown', (e) => closeOnEscape(ov, e), { once: true });
+        ov.querySelectorAll('.pd-theme-opt').forEach(opt => {
+            opt.addEventListener('click', () => {
+                const val = opt.getAttribute('data-theme-value');
+                ov.querySelectorAll('.pd-theme-opt').forEach(o => o.classList.remove('is-active'));
+                opt.classList.add('is-active');
+                const theme = val === 'system' ? (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark') : val;
+                userData.theme = theme;
+                localStorage.setItem('flowsync-theme', theme === 'light' ? 'light' : '');
+                root.setAttribute('data-theme', theme === 'light' ? 'light' : '');
+                const hint = document.getElementById('pd-hint-theme');
+                if (hint) hint.textContent = val.charAt(0).toUpperCase() + val.slice(1);
+            });
+        });
+        openOverlay(ov);
+    }
+
+    // ── Language Modal ──
+    function showLanguageModal() {
+        closePD();
+        const ov = createOverlay();
+        const langs = [
+            { code: 'en', label: 'English' }, { code: 'ur', label: 'Urdu' },
+            { code: 'fr', label: 'French' }, { code: 'es', label: 'Spanish' }
+        ];
+        ov.innerHTML = `
+            <div class="pd-modal" role="dialog" aria-label="Language">
+                <div class="pd-modal-header">
+                    <span class="pd-modal-title">Language</span>
+                    <button class="pd-modal-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                </div>
+                <div class="pd-lang-options">
+                    ${langs.map(l => `
+                        <label class="pd-lang-opt${l.code === userData.language ? ' is-active' : ''}" data-lang="${l.code}">
+                            <span>${l.label}</span>
+                            <span class="pd-lang-opt-check"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+                        </label>
+                    `).join('')}
+                </div>
+            </div>`;
+        ov.addEventListener('click', (e) => { if (e.target === ov) closeOverlay(ov); });
+        ov.querySelector('.pd-modal-close').addEventListener('click', () => closeOverlay(ov));
+        document.addEventListener('keydown', (e) => closeOnEscape(ov, e), { once: true });
+        ov.querySelectorAll('.pd-lang-opt').forEach(opt => {
+            opt.addEventListener('click', () => {
+                const code = opt.getAttribute('data-lang');
+                userData.language = code;
+                localStorage.setItem('flowsync-language', code);
+                ov.querySelectorAll('.pd-lang-opt').forEach(o => o.classList.remove('is-active'));
+                opt.classList.add('is-active');
+                const hint = document.getElementById('pd-hint-lang');
+                const label = langs.find(l => l.code === code);
+                if (hint && label) hint.textContent = label.label;
+                // Re-translate dashboard if translateUI exists
+                if (typeof translateUI === 'function') translateUI(code);
+                // Update lang selector if present
+                const langSel = document.getElementById('lang-selector');
+                if (langSel) langSel.value = code;
+            });
+        });
+        openOverlay(ov);
+    }
+
+    // ── Help Modal ──
+    function showHelpModal() {
+        closePD();
+        const ov = createOverlay();
+        ov.innerHTML = `
+            <div class="pd-modal" role="dialog" aria-label="Help Center">
+                <div class="pd-modal-header">
+                    <span class="pd-modal-title">Help Center</span>
+                    <button class="pd-modal-close" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+                </div>
+                <div class="pd-help-content">
+                    <p class="pd-help-text">Need help with FlowSync? Browse our resources or reach out to our support team.</p>
+                    <div class="pd-help-links">
+                        <a href="#" class="pd-help-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Documentation</a>
+                        <a href="#" class="pd-help-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Contact Support</a>
+                        <a href="#" class="pd-help-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Privacy & Security</a>
+                    </div>
+                </div>
+            </div>`;
+        ov.addEventListener('click', (e) => { if (e.target === ov) closeOverlay(ov); });
+        ov.querySelector('.pd-modal-close').addEventListener('click', () => closeOverlay(ov));
+        document.addEventListener('keydown', (e) => closeOnEscape(ov, e), { once: true });
+        openOverlay(ov);
+    }
+
+    // ── Logout Confirmation ──
+    const pdLogoutBtn = document.getElementById('pd-logout-btn');
+    if (pdLogoutBtn) {
+        pdLogoutBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            // Redirect to landing page (index.html is at root directory)
-            window.location.href = 'index.html';
+            closePD();
+            const ov = createOverlay();
+            ov.innerHTML = `
+                <div class="pd-modal pd-confirm" role="alertdialog" aria-label="Logout">
+                    <div class="pd-confirm-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
+                    <div class="pd-confirm-title">Logout?</div>
+                    <p class="pd-confirm-msg">Are you sure you want to logout from FlowSync?</p>
+                    <div class="pd-confirm-actions">
+                        <button class="pd-confirm-cancel" id="pd-confirm-cancel">Cancel</button>
+                        <button class="pd-confirm-logout" id="pd-confirm-logout-btn">Logout</button>
+                    </div>
+                </div>`;
+            ov.addEventListener('click', (e) => { if (e.target === ov) closeOverlay(ov); });
+            document.addEventListener('keydown', (e) => closeOnEscape(ov, e), { once: true });
+            ov.querySelector('#pd-confirm-cancel').addEventListener('click', () => closeOverlay(ov));
+            ov.querySelector('#pd-confirm-logout-btn').addEventListener('click', () => {
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('flowsync-username');
+                localStorage.removeItem('flowsync-email');
+                localStorage.removeItem('flowsync-company');
+                localStorage.removeItem('flowsync-industry');
+                localStorage.removeItem('flowsync-role');
+                localStorage.removeItem('flowsync-team-members');
+                window.location.href = 'index.html';
+            });
+            openOverlay(ov);
         });
     }
+
+    // Init
+    populateDropdown();
 
     // ────────────────────────────────────────────────────────────
     // 6. SVG LINE CHART TOOLTIP INTERACTION
