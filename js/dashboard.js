@@ -5,6 +5,12 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Session guard — redirect to landing if not logged in
+    if (localStorage.getItem('isLoggedIn') !== 'true') {
+        window.location.href = 'index.html';
+        return;
+    }
+
     // ────────────────────────────────────────────────────────────
     // 1. STATE & STORAGE PREFERENCES
     // ────────────────────────────────────────────────────────────

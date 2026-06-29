@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         role: '',
         fullName: '',
         workEmail: '',
+        password: '',
         companyName: '',
         industry: '',
         teamSize: '',
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const s2Form = document.getElementById('s2-form');
     const fullNameInput = document.getElementById('full-name');
     const workEmailInput = document.getElementById('work-email');
+    const passwordInput = document.getElementById('password');
     const companyNameInput = document.getElementById('company-name');
     const industrySelect = document.getElementById('industry');
     const teamSizeSelect = document.getElementById('team-size');
@@ -278,6 +280,18 @@ document.addEventListener('DOMContentLoaded', () => {
             clearError(workEmailInput, emailErr);
         }
 
+        // Password Validate
+        const passErr = document.getElementById('err-password');
+        if (!passwordInput.value.trim()) {
+            setError(passwordInput, passErr, 'Password is required');
+            isValid = false;
+        } else if (passwordInput.value.length < 6) {
+            setError(passwordInput, passErr, 'Password must be at least 6 characters');
+            isValid = false;
+        } else {
+            clearError(passwordInput, passErr);
+        }
+
         // Company Name Validate
         const compErr = document.getElementById('err-company-name');
         if (!companyNameInput.value.trim()) {
@@ -301,6 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isValid) {
             onboardingState.fullName = fullNameInput.value.trim();
             onboardingState.workEmail = workEmailInput.value.trim();
+            onboardingState.password = passwordInput.value.trim();
             onboardingState.companyName = companyNameInput.value.trim();
             onboardingState.industry = industrySelect.value;
             onboardingState.teamSize = teamSizeSelect.value;
@@ -516,23 +531,27 @@ document.addEventListener('DOMContentLoaded', () => {
             completeTask(task3);
         }, 3600);
 
-        // 4. Redirect to success.html (4.0s)
+        // 4. Redirect to dashboard (4.0s)
         setTimeout(() => {
             // Animate transition fade
             loadingView.style.opacity = '0';
             loadingView.style.transition = 'opacity .4s ease';
             
             setTimeout(() => {
-                // Save onboarding choices (username, company name, accent color, language, team members) to localStorage
+                // Save all onboarding data to localStorage
                 localStorage.setItem('flowsync-team-members', onboardingState.teamMembers.length + 1);
                 localStorage.setItem('flowsync-username', onboardingState.fullName);
                 localStorage.setItem('flowsync-email', onboardingState.workEmail);
+                localStorage.setItem('flowsync-password', onboardingState.password);
                 localStorage.setItem('flowsync-company', onboardingState.companyName);
+                localStorage.setItem('flowsync-industry', onboardingState.industry);
+                localStorage.setItem('flowsync-role', onboardingState.role);
                 localStorage.setItem('flowsync-accent', onboardingState.accentColor);
                 localStorage.setItem('flowsync-language', onboardingState.language);
+                localStorage.setItem('isLoggedIn', 'true');
                 
-                // Redirect to success.html
-                window.location.href = 'success.html';
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
             }, 400);
         }, 4100);
     }

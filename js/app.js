@@ -500,4 +500,131 @@ document.addEventListener('DOMContentLoaded', () => {
     calc.el.slider.value = 1;
     calc.el.valueDisplay.textContent = '1';
     updateCalculator();
+
+    // ────────────────────────────────────────────────────────────
+    // LOGIN MODAL
+    // ────────────────────────────────────────────────────────────
+
+    const loginOverlay = document.getElementById('login-overlay');
+    const loginModal = document.querySelector('.login-modal');
+    const loginForm = document.getElementById('login-form');
+    const loginEmail = document.getElementById('login-email');
+    const loginPassword = document.getElementById('login-password');
+    const loginError = document.getElementById('login-error');
+    const loginBtn = document.getElementById('login-btn');
+    const loginClose = document.getElementById('login-close');
+    const loginBack = document.getElementById('login-back');
+    const loginTrial = document.getElementById('login-trial');
+
+    function openLoginModal() {
+        loginOverlay.classList.add('is-open');
+        loginOverlay.removeAttribute('aria-hidden');
+        document.body.style.overflow = 'hidden';
+        loginForm.reset();
+        loginError.classList.remove('is-visible');
+        loginError.textContent = '';
+        loginModal.classList.remove('shake');
+        setTimeout(() => loginEmail.focus(), 100);
+    }
+
+    function closeLoginModal() {
+        loginOverlay.classList.remove('is-open');
+        loginOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        loginError.classList.remove('is-visible');
+        loginError.textContent = '';
+    }
+
+    if (loginOverlay && loginForm) {
+        // Open on Login button clicks
+        document.querySelectorAll('.nav-login, .nav-drawer-login').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                openLoginModal();
+            });
+        });
+
+        // Close via close button
+        if (loginClose) loginClose.addEventListener('click', closeLoginModal);
+
+        // Close via Back to Home button
+        if (loginBack) loginBack.addEventListener('click', closeLoginModal);
+
+        // Close on overlay click
+        loginOverlay.addEventListener('click', (e) => {
+            if (e.target === loginOverlay) closeLoginModal();
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && loginOverlay.classList.contains('is-open')) closeLoginModal();
+        });
+
+        // Start Free Trial inside modal → go to onboarding
+        if (loginTrial) {
+            loginTrial.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = 'onboarding.html';
+            });
+        }
+
+        // Form submit
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            loginError.classList.remove('is-visible');
+            loginError.textContent = '';
+            loginModal.classList.remove('shake');
+
+            const email = loginEmail.value.trim();
+            const password = loginPassword.value.trim();
+
+            if (!email || !password) {
+                loginError.textContent = 'Please fill in all fields.';
+                loginError.classList.add('is-visible');
+                loginModal.classList.add('shake');
+                return;
+            }
+
+            const storedEmail = localStorage.getItem('flowsync-email');
+            const storedPassword = localStorage.getItem('flowsync-password');
+
+            if (!storedEmail || email.toLowerCase() !== storedEmail.toLowerCase()) {
+                loginError.textContent = 'No account found. Please start your free trial.';
+                loginError.classList.add('is-visible');
+                loginModal.classList.add('shake');
+                loginBtn.classList.add('loading');
+                setTimeout(() => loginBtn.classList.remove('loading'), 600);
+                return;
+            }
+
+            if (password !== storedPassword) {
+                loginError.textContent = 'Incorrect password.';
+                loginError.classList.add('is-visible');
+                loginModal.classList.add('shake');
+                loginBtn.classList.add('loading');
+                setTimeout(() => loginBtn.classList.remove('loading'), 600);
+                return;
+            }
+
+            // Success
+            loginBtn.textContent = 'Signing in...';
+            loginBtn.classList.add('loading');
+            localStorage.setItem('isLoggedIn', 'true');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 600);
+        });
+    }
+
+    // Password visibility toggle
+    const pwToggle = document.getElementById('login-pw-toggle');
+    const pwInput = document.getElementById('login-password');
+    if (pwToggle && pwInput) {
+        pwToggle.addEventListener('click', () => {
+            const isPassword = pwInput.getAttribute('type') === 'password';
+            pwInput.setAttribute('type', isPassword ? 'text' : 'password');
+            pwToggle.querySelector('.login-eye').style.display = isPassword ? 'none' : '';
+            pwToggle.querySelector('.login-eye-off').style.display = isPassword ? '' : 'none';
+        });
+    }
 });
