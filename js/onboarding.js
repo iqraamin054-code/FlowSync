@@ -550,8 +550,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('flowsync-language', onboardingState.language);
                 localStorage.setItem('isLoggedIn', 'true');
                 
-                // Redirect to dashboard
-                window.location.href = 'dashboard.html';
+                // Redirect to success page
+                window.location.href = 'success.html';
             }, 400);
         }, 4100);
     }
