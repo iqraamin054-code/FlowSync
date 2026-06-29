@@ -7,7 +7,7 @@
 ![Frontend](https://img.shields.io/badge/Frontend-Project-blueviolet?style=for-the-badge)
 
 <p align="center">
-  <img src="assets/screenshots/FlowSync_Readme_Banner.png" width="600" alt="FlowSync Banner">
+  <img src="assets/screenshots/github-banner1.png" width="600" alt="FlowSync Banner">
 </p>
 ---
 
