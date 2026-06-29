@@ -215,14 +215,6 @@ Open index.html using Live Server or any local development server.
 
 ---
 
-# 🎥 Demo
-
-Demo Video:
-
-[Watch Full Demo](assets/videos/Flowsync_Demo_Video.MP4)
-
----
-
 # 👩‍💻 Author
 
 **Iqra Amin**
