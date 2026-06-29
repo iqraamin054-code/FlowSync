@@ -6,6 +6,8 @@
 ![Responsive](https://img.shields.io/badge/Responsive-Yes-success?style=for-the-badge)
 ![Frontend](https://img.shields.io/badge/Frontend-Project-blueviolet?style=for-the-badge)
 
+![FlowSync Banner](assets/screenshots/github-banner.png)
+
 ---
 
 # 📖 Overview
@@ -166,9 +168,12 @@ Run using Live Server or any local development server.
 
 ---
 
-## Mobile View
+<div align="center">
 
+## Mobile View
 ![Mobile View Screenshot](assets/screenshots/mobile-view.png)
+
+</div>
 
 ---
 
