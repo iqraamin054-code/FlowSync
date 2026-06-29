@@ -610,4 +610,70 @@ document.addEventListener('DOMContentLoaded', () => {
             card.style.setProperty('--ripple-y', `${y}%`);
         });
     });
+
+    // ────────────────────────────────────────────────────────────
+    // 7. NOTIFICATIONS DROPDOWN
+    // ────────────────────────────────────────────────────────────
+
+    const notifBtn = document.getElementById('btn-notifications');
+    let notifDropdown = null;
+
+    if (notifBtn) {
+        notifBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            if (notifDropdown && notifDropdown.parentNode) {
+                notifDropdown.remove();
+                notifDropdown = null;
+                return;
+            }
+
+            notifDropdown = document.createElement('div');
+            notifDropdown.className = 'notifications-dropdown';
+            notifDropdown.innerHTML = `
+                <div class="notif-header">Notifications</div>
+                <div class="notif-item"><span class="notif-dot"></span> New Report Ready</div>
+                <div class="notif-item"><span class="notif-dot"></span> System Update</div>
+                <div class="notif-item"><span class="notif-dot"></span> 3 New Messages</div>
+            `;
+
+            notifBtn.appendChild(notifDropdown);
+        });
+
+        document.addEventListener('click', () => {
+            if (notifDropdown && notifDropdown.parentNode) {
+                notifDropdown.remove();
+                notifDropdown = null;
+            }
+        });
+    }
+
+    // ────────────────────────────────────────────────────────────
+    // 8. CHART LINE DRAW-IN ANIMATION
+    // ────────────────────────────────────────────────────────────
+
+    function animatePathDraw(paths, duration, stagger) {
+        paths.forEach((path, i) => {
+            const length = path.getTotalLength();
+            path.style.strokeDasharray = length;
+            path.style.strokeDashoffset = length;
+            path.style.animation = `chartLineDraw ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${i * stagger}s forwards`;
+        });
+    }
+
+    // Main chart glow lines
+    const glowLines = document.querySelectorAll('.main-chart-svg .glow-line');
+    animatePathDraw(glowLines, 1.5, 0.15);
+
+    // KPI sparkline stroke paths (last path in each sparkline-svg)
+    document.querySelectorAll('.sparkline-svg').forEach((svg, i) => {
+        const paths = svg.querySelectorAll('path');
+        if (paths.length > 0) {
+            const strokePath = paths[paths.length - 1];
+            const length = strokePath.getTotalLength();
+            strokePath.style.strokeDasharray = length;
+            strokePath.style.strokeDashoffset = length;
+            strokePath.style.animation = `chartLineDraw 1s cubic-bezier(0.16, 1, 0.3, 1) ${0.4 + i * 0.1}s forwards`;
+        }
+    });
 });
